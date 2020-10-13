@@ -9,6 +9,69 @@ line programs with help text loaded directly from docstrings, and is only ~400 l
 
 Scroll [down](#examples) to see some examples.
 
+## Design
+
+ArgBind is designed around a function decorator that can be applied to
+any function. The typed keyword arguments to that function are 
+then bound to a dictionary. When the function is called, 
+each keyword argument is looked up in the dictionary and its
+value is replaced with the corresponding value in the dictionary. The
+dictionary that the function looks for values in is controlled by
+`scope`:
+
+```python
+import argbind 
+
+@argbind.bind_to_parser()
+def func(arg : str = 'default'):
+    print(arg)
+
+dict1 = {
+    'func.arg': 1,
+}
+dict2 = {
+    'func.arg': 2
+}
+
+with argbind.scope(dict1):
+    func() # prints 1
+with argbind.scope(dict2):
+    func() # prints 2
+func(arg=3) # prints 3.
+```
+
+The function arguments are bound to the command line. Continuing the 
+simple program from above:
+
+```python
+if __name__ == "__main__":
+    args = argbind.parse_args()
+    with argbind.scope(args):
+        func()
+    with argbind.scope(args):
+        func(arg=3)
+```
+
+You can call this function like so:
+
+```bash
+❯ python examples/readme_example.py --func.arg 5
+1 # Looks up `arg` in dict1
+2 # Looks up `arg` in dict2
+3 # arg is passed in on python call `func(arg=3)`
+5 # Looks up `arg` from command line call `--func.arg 5`
+3 # arg is passed in from two places: `func(arg=3)` and `--func.arg 5`. Former overrides the latter.
+```
+
+The catch is that the function's keyword argument MUST be typed.
+This is required so that ArgBind knows how to parse it from the
+command line.
+
+## Examples
+
+- [Example 1: Hello World](./examples/hello_world/README.md)
+- [Example 2: Scope patterns](./examples/scoping/README.md)
+
 ## Usage
 
 ### How to bind a function
@@ -106,7 +169,3 @@ way to override it from the command line. If you want a flag to
 be flippable, make the argument an int instead of a bool and use
 0 and 1 for True and False. Then you can override from command
 line like `--func.arg 0` or `--func.arg 1`.
-
-## Examples
-
-- [Example 1: Hello World](./examples/hello_world/README.md)

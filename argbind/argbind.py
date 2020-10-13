@@ -71,13 +71,13 @@ def bind_to_parser(*patterns, no_global=False):
                 arg_val = val.default
                 if arg_val is not inspect.Parameter.empty:
                     arg_name = f'{prefix}.{key}'
-                    if arg_name in ARGS:
+                    if arg_name in ARGS and key not in kwargs:
                         cmd_kwargs[key] = ARGS[arg_name]
                         use_key = arg_name
                         if PATTERN:
                             use_key = f'{PATTERN}/{use_key}'
                         USED_ARGS[use_key] = ARGS[arg_name]
-
+            
             kwargs.update(cmd_kwargs)
             if 'args.debug' not in ARGS: ARGS['args.debug'] = False
             if ARGS['args.debug'] or DEBUG:
