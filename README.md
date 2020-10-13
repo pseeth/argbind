@@ -1,13 +1,13 @@
-# ArgBind: binding function arguments to the command line
+# ArgBind**
 
-ArgBind is a simple way to bind arguments to functions to the command line. It
-also supports scoping of arguments, similar to other frameworks like 
+*ArgBind is a simple way to bind arguments to functions to the command line or to .yml files!* It supports scoping of arguments, similar to other frameworks like 
 [Hydra](https://github.com/facebookresearch/hydra) and
-[gin-config](https://github.com/google/gin-config). Unlike these other frameworks,
+[gin-config](https://github.com/google/gin-config).
 ArgBind is *very* small, can be used to make super simple command
-line programs with help text loaded directly from docstrings, and is only ~400 lines.
+line programs with help text loaded directly from docstrings, and allows you
+to configure program execution from .yml files. Best of all, it's only ~300 lines!
 
-Scroll [down](#examples) to see some examples.
+Scroll down to see some [examples](#examples).
 
 ## Design
 
