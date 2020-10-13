@@ -19,15 +19,15 @@ parser inspects each function in PARSE_FUNCS
 and adds it to the argument flags. For example:
 
 ```python
-    @bind_to_parser('train', 'val')
-    def autoclip(percentile : float = 10.0):
-        print(f'Called autoclip with percentile={percentile}')
+@bind_to_parser('train', 'val')
+def autoclip(percentile : float = 10.0):
+    print(f'Called autoclip with percentile={percentile}')
 ```
 
 This functions arguments are available at:
 
 ```bash
-    python example.py --autoclip.percentile=N
+python example.py --autoclip.percentile=N
 ```
 
 The function arguments must be annotated with
@@ -43,23 +43,23 @@ and `val` so the additional arguments are also
 available for binding:
 
 ```bash
-    python example.py \ 
-        --autoclip.percentile=100 
-        --train/autoclip.percentile=1
-        --val/autoclip.percentile=5
+python example.py \ 
+    --autoclip.percentile=100 
+    --train/autoclip.percentile=1
+    --val/autoclip.percentile=5
 ```
 
 Use with the corresponding code:
 
 ```python
-    # above this, parse the args
-    args = argbind.parse_args()
-    with scope(args):
-        autoclip() # prints 100
-    with scope(args, 'train'):
-        autoclip() # prints 1
-    with scope(args, 'val'):
-        autoclip() # prints 5
+# above this, parse the args
+args = argbind.parse_args()
+with scope(args):
+    autoclip() # prints 100
+with scope(args, 'train'):
+    autoclip() # prints 1
+with scope(args, 'val'):
+    autoclip() # prints 5
 ```
 
 ### Saving and loading arguments in .yml files
@@ -73,10 +73,10 @@ the run (including all default values for all functions)
 to a .yml file, for example:
 
 ```yml
-    stages.run:
-    - TRAIN
-    - EVALUATE
-    - ANALYZE
+stages.run:
+- TRAIN
+- EVALUATE
+- ANALYZE
 ```
 
 Then, when you use --args.load with the path to the saved
@@ -85,9 +85,9 @@ TRAIN, then EVALUATE, then ANALYZE. If you edit it to
 look like this:
 
 ```yml
-    stages.run:
-    - TRAIN
-    - EVALUATE
+stages.run:
+- TRAIN
+- EVALUATE
 ```
 
 then only the first two stages will be run. The .yml files are
