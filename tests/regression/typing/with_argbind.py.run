@@ -1,0 +1,8 @@
+func <- str_arg=string, int_arg=1, dict_arg=None, list_int_arg=None, list_str_arg=None, bool_arg=False, tuple_arg=None
+String argument - type: <class 'str'>, val: string
+Integer argument - type: <class 'int'>, val: 1
+Dictionary argument - type: <class 'NoneType'>, val: None
+List of ints argument - type: <class 'NoneType'>, val: None
+List of strings argument - type: <class 'NoneType'>, val: None
+Boolean argument - type: <class 'bool'>, val: False
+Tuple of (int, float, str) - type: <class 'NoneType'>, val: None

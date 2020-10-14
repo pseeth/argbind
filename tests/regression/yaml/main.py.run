@@ -1,0 +1,5 @@
+func <- arg1=default, arg2=default, arg3=default, arg4=default
+Argument 1: default
+Argument 2: default
+Argument 3: default
+Argument 4: default

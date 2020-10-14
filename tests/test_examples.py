@@ -45,7 +45,7 @@ def test_example(path):
         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     output = output.stdout.decode('utf-8')
 
-    _path = path.split('examples/')[-1] + '.log'
+    _path = path.split('examples/')[-1] + '.run'
     output_path = regression_path / _path
     check(output, output_path)
 
