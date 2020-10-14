@@ -23,6 +23,7 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -e ".[tests]"
+        python examples/mnist/with_argparse.py --epochs=0
     - name: Test with pytest
       run: |
         pytest
