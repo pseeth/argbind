@@ -274,6 +274,10 @@ a path to the function etc.
 ArgBind uses [docstring-parser](https://github.com/rr-/docstring_parser), and so
 the only supported styles are: ReST, Google, and Numpydoc-style docstrings.
 
+## Not all types are supported
+
+ArgBind supports most types that might pop up in your script, but not all. The supported types can be seed in the [typing example](./examples/typing/).
+
 # Releasing
 
 Do the following steps:
