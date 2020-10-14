@@ -3,6 +3,7 @@ import pytest
 import pathlib
 import subprocess
 import os
+from subprocess import PIPE
 
 here = pathlib.Path(__file__).parent.resolve()
 examples_path = here.parent / 'examples'
@@ -24,7 +25,8 @@ def check(output, output_path):
 @pytest.mark.parametrize("path", paths)
 def test_example(path):
     # Get help text
-    output = subprocess.run(["python", path, "-h"], capture_output=True)
+    output = subprocess.run(["python", path, "-h"], 
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     output = output.stdout.decode('utf-8')
     
     _path = path.split('examples/')[-1] + '.help'
@@ -32,10 +34,15 @@ def test_example(path):
     check(output, output_path)
 
     # Execute it
-    add_args = ["--args.debug=1"]
-    if 'mnist' in path:
-        add_args.append("--main.epochs=0")
-    output = subprocess.run(["python", path] + add_args, capture_output=True)
+    add_args = []
+    if 'argparse' not in path:
+        add_args.append("--args.debug=1")
+        if 'mnist' in path:
+            add_args.append("--main.epochs=0")
+    elif 'mnist' in path:
+        add_args.append("--epochs=0")
+    output = subprocess.run(["python", path] + add_args, 
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     output = output.stdout.decode('utf-8')
 
     _path = path.split('examples/')[-1] + '.log'
