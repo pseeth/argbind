@@ -101,6 +101,28 @@ if __name__ == "__main__":
         hello()
 ```
 
+Help text is automatically generated from the docstring:
+
+```
+❯ python examples/hello_world/with_argbind.py -h
+usage: with_argbind.py [-h] [--args.save ARGS.SAVE] [--args.load ARGS.LOAD] [--args.debug ARGS.DEBUG] [--hello.name HELLO.NAME]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --args.save ARGS.SAVE
+                        Path to save all arguments used to run script to.
+  --args.load ARGS.LOAD
+                        Path to load arguments from, stored as a .yml file.
+  --args.debug ARGS.DEBUG
+                        Print arguments as they are passed to each function.
+
+Generated arguments for function hello:
+  Say hello to someone.
+
+  --hello.name HELLO.NAME
+                        Who you're saying hello to, by default 'world'
+```
+
 Execution of this could look like:
 
 ```
