@@ -56,8 +56,7 @@ Dictionary argument - type: <class 'dict'>, val: {'x': 5, 'y': 'a'}
 List of ints argument - type: <class 'list'>, val: [1, 2, 3]
 List of strings argument - type: <class 'list'>, val: ['a', 'b', 'c']
 Boolean argument - type: <class 'bool'>, val: True
-Tuple of (int, float, str) - type: <class 'list'>, val: [1, 1.0, 'number1']
-❯
+Tuple of (int, float, str) - type: <class 'tuple'>, val: (1, 1.0, 'number1')
 ❯ python examples/typing/with_argbind.py --args.load /tmp/saved_args.yml
 String argument - type: <class 'str'>, val: test
 Integer argument - type: <class 'int'>, val: 10
@@ -65,7 +64,7 @@ Dictionary argument - type: <class 'dict'>, val: {'x': 5, 'y': 'a'}
 List of ints argument - type: <class 'list'>, val: [1, 2, 3]
 List of strings argument - type: <class 'list'>, val: ['a', 'b', 'c']
 Boolean argument - type: <class 'bool'>, val: True
-Tuple of (int, float, str) - type: <class 'list'>, val: [1, 1.0, 'number1']
+Tuple of (int, float, str) - type: <class 'tuple'>, val: (1, 1.0, 'number1')
 ```
 
 `saved_args.yml` looks like this:
@@ -86,7 +85,7 @@ func.list_str_arg:
 - b
 - c
 func.str_arg: test
-func.tuple_arg:
+func.tuple_arg: !!python/tuple
 - 1
 - 1.0
 - number1

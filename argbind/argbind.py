@@ -166,7 +166,7 @@ class str_to_tuple():
     def __call__(self, values):
         _values = values.split(' ')
         _values = [self._type_list[i](v) for i, v in enumerate(_values)]
-        return _values
+        return tuple(_values)
 
 class str_to_dict():
     def __init__(self):
