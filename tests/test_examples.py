@@ -68,4 +68,21 @@ def test_example(path):
                 stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             output2 = output.stdout.decode('utf-8')
 
-            assert output1 == output2
+            assert output1 == output2        
+
+def test_yaml_example():
+    added_args = [
+        '--args.load=examples/yaml/conf/base.yml',
+        '--args.load=examples/yaml/conf/exp1.yml',
+        '--args.load=examples/yaml/conf/exp2.yml'
+    ]
+
+    path = str(examples_path / 'yaml' / 'main.py')
+    for i, add_arg in enumerate(added_args):
+        output = subprocess.run(["python", path] + [add_arg], 
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        output = output.stdout.decode('utf-8')
+
+        _path = path.split('examples/')[-1] + f'.run{i}'
+        output_path = regression_path / _path
+        check(output, output_path)
