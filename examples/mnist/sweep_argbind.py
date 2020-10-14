@@ -19,5 +19,6 @@ for bs in batch_sizes:
         args['main.lr'] = lr
         with argbind.scope(args):
             main()
+            used_args = argbind.get_used_args() # You can get the used args.
         print()
         N += 1

@@ -5,6 +5,10 @@ import subprocess
 import os
 from subprocess import PIPE
 import tempfile
+import yaml
+import argbind
+
+OVERWRITE = False
 
 here = pathlib.Path(__file__).parent.resolve()
 examples_path = here.parent / 'examples'
@@ -14,7 +18,7 @@ paths = glob.glob(str(examples_path) + '/*/*.py')
 os.makedirs(regression_path, exist_ok=True)
 
 def check(output, output_path):
-    if not os.path.exists(output_path):
+    if not os.path.exists(output_path) or OVERWRITE:
         output_path.parent.mkdir(exist_ok=True)
         with open(output_path, 'w') as f:
             f.write(output)
@@ -108,3 +112,38 @@ def test_typing_example():
         _path = path.split('examples/')[-1] + f'.run{i}'
         output_path = regression_path / _path
         check(output, output_path)
+
+def test_scoping_example():
+    added_args = [
+        [
+            "--dataset.folder=newdefault",
+        ],
+        [
+            "--dataset.folder=newdefault", 
+            "--train/dataset.folder=train"
+        ]
+    ]
+
+    path = str(examples_path / 'scoping' / 'with_argbind.py')
+    for i, add_arg in enumerate(added_args):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            save_path = str(pathlib.Path(tmpdir) / 'args.yml')
+            add_args = [f'--args.save={save_path}'] + add_arg
+            output = subprocess.run(["python", path] + add_args, 
+                stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+            data = argbind.load_args(save_path)
+            data = {key: val for key, val in data.items() if '/' not in key}
+            argbind.dump_args(data, save_path)
+
+            add_arg = [x for x in add_arg if '/' not in x]
+            add_args = [f'--args.load={save_path}'] + add_arg
+            
+            output = subprocess.run(["python", path] + add_args, 
+                stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            output = output.stdout.decode('utf-8')
+
+            _path = path.split('examples/')[-1] + f'.run{i}'
+            output_path = regression_path / _path
+            check(output, output_path)
+

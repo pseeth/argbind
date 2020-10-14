@@ -30,9 +30,6 @@ def scope(parsed_args, pattern=''):
     global ARGS
     global PATTERN
 
-    if parsed_args is None:
-        parsed_args = ARGS
-
     old_args = ARGS
     old_pattern = PATTERN
 
@@ -288,7 +285,7 @@ def parse_args():
     debug_args = args.pop('args.debug')
     
     pattern_keys = [key for key in args if '/' in key]
-    top_level_args =[key for key in args if '/' not in key]
+    top_level_args = [key for key in args if '/' not in key]
 
     for key in pattern_keys:
         # If the top-level arguments were altered but the ones
