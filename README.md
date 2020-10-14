@@ -1,5 +1,8 @@
 # ArgBind
 
+
+![Build](https://github.com/pseeth/argbind/workflows/Build/badge.svg) 
+
 *ArgBind is a simple way to bind arguments to functions to the command line or to .yml files!* It supports scoping of arguments, similar to other frameworks like 
 [Hydra](https://github.com/facebookresearch/hydra) and
 [gin-config](https://github.com/google/gin-config).
