@@ -10,7 +10,7 @@
 [gin-config](https://github.com/google/gin-config).
 ArgBind is *very* small, can be used to make super simple command
 line programs with help text loaded directly from docstrings, and allows you
-to configure program execution from .yml files. Best of all, it's only ~300 lines!
+to configure program execution from .yml files. Best of all, it's <300 lines of code!
 
 Scroll down to see some [examples](#examples). Please also look at the 
 current known [limitations](#limitations) of ArgBind.
