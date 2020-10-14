@@ -266,6 +266,7 @@ def parse_args():
                             default=arg_val, help=arg_help[arg_name])
             
         desc = docstring.short_description
+        if desc is None: desc = ''
 
         if patterns:
             desc += (

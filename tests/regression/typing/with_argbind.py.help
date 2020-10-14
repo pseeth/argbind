@@ -1,0 +1,26 @@
+usage: with_argbind.py [-h] [--args.save ARGS.SAVE] [--args.load ARGS.LOAD]
+                       [--args.debug ARGS.DEBUG] [--func.str_arg FUNC.STR_ARG]
+                       [--func.int_arg FUNC.INT_ARG]
+                       [--func.dict_arg FUNC.DICT_ARG]
+                       [--func.list_int_arg FUNC.LIST_INT_ARG]
+                       [--func.list_str_arg FUNC.LIST_STR_ARG]
+                       [--func.bool_arg] [--func.tuple_arg FUNC.TUPLE_ARG]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --args.save ARGS.SAVE
+                        Path to save all arguments used to run script to.
+  --args.load ARGS.LOAD
+                        Path to load arguments from, stored as a .yml file.
+  --args.debug ARGS.DEBUG
+                        Print arguments as they are passed to each function.
+
+Generated arguments for function func:
+
+  --func.str_arg FUNC.STR_ARG
+  --func.int_arg FUNC.INT_ARG
+  --func.dict_arg FUNC.DICT_ARG
+  --func.list_int_arg FUNC.LIST_INT_ARG
+  --func.list_str_arg FUNC.LIST_STR_ARG
+  --func.bool_arg
+  --func.tuple_arg FUNC.TUPLE_ARG
