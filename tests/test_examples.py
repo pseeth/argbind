@@ -86,3 +86,25 @@ def test_yaml_example():
         _path = path.split('examples/')[-1] + f'.run{i}'
         output_path = regression_path / _path
         check(output, output_path)
+
+def test_typing_example():
+    added_args = [
+        [
+            "--func.str_arg=test",
+            "--func.int_arg=10",
+            "--func.dict_arg=x=5 y=a",
+            "--func.list_int_arg=1 2 3",
+            "--func.list_str_arg=a b c",
+            "--func.bool_arg",
+            "--func.tuple_arg=1 1.0 number1"
+        ]
+    ]
+    path = str(examples_path / 'typing' / 'with_argbind.py')
+    for i, add_arg in enumerate(added_args):
+        output = subprocess.run(["python", path] + add_arg, 
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        output = output.stdout.decode('utf-8')
+
+        _path = path.split('examples/')[-1] + f'.run{i}'
+        output_path = regression_path / _path
+        check(output, output_path)

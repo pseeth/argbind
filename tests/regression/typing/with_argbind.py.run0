@@ -1,0 +1,7 @@
+String argument - type: <class 'str'>, val: test
+Integer argument - type: <class 'int'>, val: 10
+Dictionary argument - type: <class 'dict'>, val: {'x': 5, 'y': 'a'}
+List of ints argument - type: <class 'list'>, val: [1, 2, 3]
+List of strings argument - type: <class 'list'>, val: ['a', 'b', 'c']
+Boolean argument - type: <class 'bool'>, val: True
+Tuple of (int, float, str) - type: <class 'tuple'>, val: (1, 1.0, 'number1')
