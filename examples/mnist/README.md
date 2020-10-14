@@ -217,7 +217,7 @@ args['args.debug'] = True
 # Sweep over training batch size and learning rate
 batch_sizes = [16, 32, 64]
 learning_rates = [0.1, 0.5, 1.0]
-N = 0
+N = 1
 
 for bs in batch_sizes:
     for lr in learning_rates:
