@@ -4,6 +4,7 @@ import pathlib
 import subprocess
 import os
 from subprocess import PIPE
+import tempfile
 
 here = pathlib.Path(__file__).parent.resolve()
 examples_path = here.parent / 'examples'
@@ -49,3 +50,22 @@ def test_example(path):
     output_path = regression_path / _path
     check(output, output_path)
 
+    # Test argbind with saving/loading args
+    with tempfile.TemporaryDirectory() as tmpdir:
+        if 'argparse' not in path:
+            # Save args
+            save_path = str(pathlib.Path(tmpdir) / 'args.yml')
+            add_args = [f'--args.save={save_path}']
+            if 'mnist' in path:
+                add_args.append("--main.epochs=0")
+            output = subprocess.run(["python", path] + add_args, 
+                stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            output1 = output.stdout.decode('utf-8')
+
+            # Load args
+            add_args[0] = f'--args.load={save_path}'
+            output = subprocess.run(["python", path] + add_args, 
+                stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            output2 = output.stdout.decode('utf-8')
+
+            assert output1 == output2
