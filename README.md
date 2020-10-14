@@ -141,7 +141,7 @@ Hello me
 ```
 
 You'll notice that ArgBind forces you to document and type your 
-functions, which is always a good idea! 
+function arguments, which is always a good idea! 
 Please check out the [examples](#examples) for more details!
 
 
