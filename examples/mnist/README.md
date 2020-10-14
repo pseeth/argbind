@@ -6,6 +6,13 @@ The following three scripts are considered here:
 - `examples/mnist/with_argbind.py`
 - `examples/mnist/with_argbind_and_refactor.py`
 
+To run the scripts, you need `torch` and `torchvision`, which you can get
+by:
+
+```
+python -m pip install -e ".[examples]"
+```
+
 ## ArgParse version
 
 This is the original version of a script that trains a classifier on 

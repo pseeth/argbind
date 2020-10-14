@@ -7,7 +7,48 @@ ArgBind is *very* small, can be used to make super simple command
 line programs with help text loaded directly from docstrings, and allows you
 to configure program execution from .yml files. Best of all, it's only ~300 lines!
 
-Scroll down to see some [examples](#examples).
+Scroll down to see some [examples](#examples). Please also look at the 
+current known [limitations](#limitations) of ArgBind.
+
+## Why ArgBind?
+
+I built ArgBind mostly to help me configure my machine learning experiments. ML experiment
+configuration is often highly nested, and can get out of hand quick. I didn't want to switch
+my workflow around too much to accommodate a new framework. Instead, I wanted the scripts
+that I've written to be easily adapted so that I could achieve a few goals:
+
+1. Configure scripts using `.yml` files. Be able to save `.yml` files that can be used to rerun scripts the exact same way twice.
+2. Spend time writing actual functions needed to run experiments, not argument parsers.
+3. Be able to run my experiment code from other Python scripts, notebooks, or the command line.
+4. Be able to specify arguments from the command line directly to various functions.
+5. Be able to use scoping patterns, so I can run a function inside of a `train` scope and `test` scope, with different results (e.g. for getting a train dataset and a test dataset).
+
+Nothing out there really fit the bill, so I wrote ArgBind. It's simple, 
+small, and easy to use. To get a feel for how it works, please look at some examples!
+
+## Installation
+
+Install via `pip`:
+
+```
+python -m pip install argbind
+```
+
+Or from source:
+
+```
+git clone https://github.com/pseeth/argbind.git
+cd argbind
+python -m pip install -e .
+```
+
+## Examples
+
+- [Example 1: Hello World](./examples/hello_world/)
+- [Example 2: Scope patterns](./examples/scoping/)
+- [Example 3: Typing](./examples/typing/)
+- [Example 4: MNIST Script](./examples/mnist/)
+- [Example 5: Extended syntax for .yml files](./examples/yaml)
 
 ## Design
 
@@ -67,14 +108,6 @@ You can call this function like so:
 The catch is that the function's keyword argument MUST be typed.
 This is required so that ArgBind knows how to parse it from the
 command line.
-
-## Examples
-
-- [Example 1: Hello World](./examples/hello_world/)
-- [Example 2: Scope patterns](./examples/scoping/)
-- [Example 3: Typing](./examples/typing/)
-- [Example 4: MNIST Script](./examples/mnist/)
-- [Example 5: Extended syntax for .yml files](./examples/yaml)
 
 ## Usage
 
@@ -168,11 +201,62 @@ python program.py --args.load args.yml --stages.run TRAIN
 will only run the TRAIN stage, even if args.yml file looks like
 above. 
 
-NOTE: If a boolean is flipped to True in the .yml file, there's no
+# Limitations
+
+There are some limitations to ArgBind, some due to how Python function decorator works,
+and others out of a desire to keep ArgBind's code simple and straightforward.
+
+## Boolean keyword arguments
+
+If a boolean is flipped to True in a `.yml` file, there's no
 way to override it from the command line. If you want a flag to
 be flippable, make the argument an int instead of a bool and use
 0 and 1 for True and False. Then you can override from command
 line like `--func.arg 0` or `--func.arg 1`.
+
+## Functions get wrapped
+
+Functions get wrapped and returned as a different function. This other function
+is called `cmd_func`, and it's where the magic happens. `cmd_func` does a lookup in
+the currently scoped argument dictionary to find matching keyword arguments to
+the function it wrapped. Then it calls the function using the matched keyword arguments.
+So, if you bind a function, and then inspect it, you won't see the original function.
+Instead, you'll see `cmd_func`. This can have adverse effects if you bind a class with
+ArgBind, as the actual class will become a function! For now (and possibly forever), 
+don't bind classes, bind only functions.
+
+## Bound function names should be unique
+
+Functions that are bound must be unique, even if they are in different files. The 
+function name is resolved in the argument parser only using the immediate name, not
+a path to the function etc. 
+
+## Only numpydoc is supported
+
+Right now, help text can only be extracted from the docstring if it is written conforming to `numpydoc` style. This will be fixed eventually, hopefully using
+something like https://github.com/rr-/docstring_parser.
+
+# Releasing
+
+Do the following steps:
+
+```
+python setup.py sdist
+```
+
+Upload it to test PyPI:
+
+```
+twine upload --repository testpypi dist/*
+pip install -U --index-url https://test.pypi.org/simple/ -U argbind
+```
+
+Make sure you can install it and it works (e.g. run the examples). Now upload
+to actual PyPI:
+
+```
+twine upload dist/*
+```
 
 # Issues? Questions?
 
