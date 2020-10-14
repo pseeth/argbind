@@ -166,3 +166,13 @@ Argument 2: from exp2
 Argument 3: from base
 Argument 4: from exp1
 ```
+
+As usual, we can override arguments from the command line:
+
+```
+❯ python examples/yaml/main.py --args.load examples/yaml/conf/exp2.yml --func.arg2 "from command line"
+Argument 1: from exp2
+Argument 2: from command line
+Argument 3: from base
+Argument 4: from exp1
+```
