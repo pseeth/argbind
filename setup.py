@@ -38,5 +38,6 @@ setup(
     ],
     extras_require={ 
         'test': ['pytest'],
+        'examples': ['torch', 'torchvision']
     },
 )

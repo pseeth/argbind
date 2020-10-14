@@ -1,0 +1,10 @@
+main.batch_size: 64
+main.dry_run: false
+main.epochs: 0
+main.gamma: 0.7
+main.log_interval: 10
+main.lr: 1.0
+main.no_cuda: false
+main.save_model: false
+main.seed: 1
+main.test_batch_size: 1000

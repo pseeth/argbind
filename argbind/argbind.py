@@ -279,7 +279,7 @@ def parse_args():
         desc = textwrap.fill(desc, width=HELP_WIDTH)
         f.description = desc
     
-    used_args = [x.replace('--', '') for x in sys.argv if x.startswith('--')]
+    used_args = [x.replace('--', '').split('=')[0] for x in sys.argv if x.startswith('--')]
     used_args.extend(['args.save', 'args.load'])
 
     args = vars(p.parse_args())

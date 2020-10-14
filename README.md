@@ -70,9 +70,10 @@ command line.
 
 ## Examples
 
-- [Example 1: Hello World](./examples/hello_world/README.md)
-- [Example 2: Scope patterns](./examples/scoping/README.md)
-- [Example 3: Typing](./examples/typing/README.md)
+- [Example 1: Hello World](./examples/hello_world/)
+- [Example 2: Scope patterns](./examples/scoping/)
+- [Example 3: Typing](./examples/typing/)
+- [Example 4: MNIST Script](./examples/mnist/)
 
 ## Usage
 
@@ -171,3 +172,9 @@ way to override it from the command line. If you want a flag to
 be flippable, make the argument an int instead of a bool and use
 0 and 1 for True and False. Then you can override from command
 line like `--func.arg 0` or `--func.arg 1`.
+
+# Issues? Questions?
+
+If you've run into some issues with ArgBind, or have some questions, please ask 
+via Github Issues. Projects like ArgBind are pretty tricky to get right, so there
+are surely some edge cases that have been missed.
