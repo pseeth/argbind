@@ -1,0 +1,39 @@
+usage: with_argbind.py [-h] [--args.save ARGS.SAVE] [--args.load ARGS.LOAD]
+                       [--args.debug ARGS.DEBUG]
+                       [--main.batch_size MAIN.BATCH_SIZE]
+                       [--main.test_batch_size MAIN.TEST_BATCH_SIZE]
+                       [--main.epochs MAIN.EPOCHS] [--main.lr MAIN.LR]
+                       [--main.gamma MAIN.GAMMA] [--main.no_cuda]
+                       [--main.dry_run] [--main.seed MAIN.SEED]
+                       [--main.log_interval MAIN.LOG_INTERVAL]
+                       [--main.save_model]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --args.save ARGS.SAVE
+                        Path to save all arguments used to run script to.
+  --args.load ARGS.LOAD
+                        Path to load arguments from, stored as a .yml file.
+  --args.debug ARGS.DEBUG
+                        Print arguments as they are passed to each function.
+
+Generated arguments for function main:
+  Runs an MNIST classification experiment.
+
+  --main.batch_size MAIN.BATCH_SIZE
+                        input batch size for training, by default 64
+  --main.test_batch_size MAIN.TEST_BATCH_SIZE
+                        input batch size for testing, by default 1000
+  --main.epochs MAIN.EPOCHS
+                        number of epochs to train, by default 14
+  --main.lr MAIN.LR     learning rate, by default 1.0
+  --main.gamma MAIN.GAMMA
+                        Learning rate step gamma, by default 0.7
+  --main.no_cuda        disables CUDA training, by default False
+  --main.dry_run        quickly check a single pass, by default False
+  --main.seed MAIN.SEED
+                        random seed, by default 1
+  --main.log_interval MAIN.LOG_INTERVAL
+                        how many batches to wait before logging training status, by
+                        default 10
+  --main.save_model     For Saving the current Model, by default False

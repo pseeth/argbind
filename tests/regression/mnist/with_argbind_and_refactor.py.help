@@ -1,0 +1,68 @@
+usage: with_argbind_and_refactor.py [-h] [--args.save ARGS.SAVE]
+                                    [--args.load ARGS.LOAD]
+                                    [--args.debug ARGS.DEBUG]
+                                    [--train.log_interval TRAIN.LOG_INTERVAL]
+                                    [--train.dry_run]
+                                    [--dataset.folder DATASET.FOLDER]
+                                    [--dataset.split DATASET.SPLIT]
+                                    [--dataset.batch_size DATASET.BATCH_SIZE]
+                                    [--optimizer.lr OPTIMIZER.LR]
+                                    [--scheduler.step_size SCHEDULER.STEP_SIZE]
+                                    [--scheduler.gamma SCHEDULER.GAMMA]
+                                    [--main.epochs MAIN.EPOCHS]
+                                    [--main.no_cuda] [--main.seed MAIN.SEED]
+                                    [--main.save_model]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --args.save ARGS.SAVE
+                        Path to save all arguments used to run script to.
+  --args.load ARGS.LOAD
+                        Path to load arguments from, stored as a .yml file.
+  --args.debug ARGS.DEBUG
+                        Print arguments as they are passed to each function.
+
+Generated arguments for function train:
+  Trains a model.
+
+  --train.log_interval TRAIN.LOG_INTERVAL
+                        how many batches to wait before logging training status, by
+                        default 10
+  --train.dry_run       For Saving the current Model, by default False
+
+Generated arguments for function dataset:
+  Configuration for the dataset. Additional scope patterns:
+  train, test. Use these by prefacing any of the args below
+  with one of these patterns. For example:
+  --train/dataset.batch_size VALUE.
+
+  --dataset.folder DATASET.FOLDER
+                        Where to download the data, by default '../data'
+  --dataset.split DATASET.SPLIT
+                        'train' or 'test' split of MNIST, by default 'train'
+  --dataset.batch_size DATASET.BATCH_SIZE
+                        Batch size for dataloader, by default 64
+
+Generated arguments for function optimizer:
+  Configuration for Adadelta optimizer.
+
+  --optimizer.lr OPTIMIZER.LR
+                        learning rate, by default 1.0
+
+Generated arguments for function scheduler:
+  Configuration for StepLR scheduler.
+
+  --scheduler.step_size SCHEDULER.STEP_SIZE
+                        Step size in StepLR, by default 1
+  --scheduler.gamma SCHEDULER.GAMMA
+                        Learning rate step gamma, by default 0.7
+
+Generated arguments for function main:
+  Runs an MNIST classification experiment.
+
+  --main.epochs MAIN.EPOCHS
+                        number of epochs to train, by default 14
+  --main.no_cuda        disables CUDA training, by default False
+  --main.seed MAIN.SEED
+                        random seed, by default 1
+  --main.save_model     For Saving the current Model, by default False

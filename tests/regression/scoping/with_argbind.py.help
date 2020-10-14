@@ -1,0 +1,21 @@
+usage: with_argbind.py [-h] [--args.save ARGS.SAVE] [--args.load ARGS.LOAD]
+                       [--args.debug ARGS.DEBUG]
+                       [--dataset.folder DATASET.FOLDER]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --args.save ARGS.SAVE
+                        Path to save all arguments used to run script to.
+  --args.load ARGS.LOAD
+                        Path to load arguments from, stored as a .yml file.
+  --args.debug ARGS.DEBUG
+                        Print arguments as they are passed to each function.
+
+Generated arguments for function dataset:
+  Creates a dataset. Additional scope patterns: train, val,
+  test. Use these by prefacing any of the args below with one
+  of these patterns. For example: --train/dataset.folder
+  VALUE.
+
+  --dataset.folder DATASET.FOLDER
+                        Folder for the dataset, by default 'default'

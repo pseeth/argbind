@@ -1,0 +1,5 @@
+usage: with_argparse.py [-h] [--name NAME]
+
+optional arguments:
+  -h, --help   show this help message and exit
+  --name NAME  Who you're saying hello to.
