@@ -140,6 +140,25 @@ Hello you
 Hello me
 ```
 
+You can also run the `hello` function from another Python script or a Jupyter notebook:
+
+```python
+import argbind
+# Import the bound function
+from .hello_world import hello 
+# Load the args
+args = argbind.load_args('/tmp/args.yml')
+# Scope the args
+with argbind.scope(args):
+    # Run the bound function
+    hello() # Prints 'Hello you'.
+hello() # Prints 'Hello world', as it's outside scope.
+# Can edit the args before scoping again.
+args['hello.name'] = 'me'
+with argbind.scope(args):
+    hello() # Prints 'Hello me'.
+```
+
 You'll notice that ArgBind forces you to document and type your 
 function arguments, which is always a good idea! 
 Please check out the [examples](#examples) for more details!
