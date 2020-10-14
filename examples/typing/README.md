@@ -15,7 +15,7 @@ signature. The following types are supported:
 - Booleans
     - Passed in as flags from command line, like `--func.bool_arg`, which will set it to True. Make the default False.
 - Tuples
-    -Tuples must be strongly typed, with each entry in the expected tuple typed, like this `Tuple[int, float, str]`.
+    - Tuples must be strongly typed, with each entry in the expected tuple typed, like this `Tuple[int, float, str]`.
 
 ## Example
 
