@@ -245,6 +245,13 @@ be flippable, make the argument an int instead of a bool and use
 0 and 1 for True and False. Then you can override from command
 line like `--func.arg 0` or `--func.arg 1`.
 
+## Only typed keyword arguments are bound
+
+Only keyword arguments that have types associated with them are bound 
+in functions. Positional arguments are not bound. Untyped keyword
+arguments cannot be bound, because ArgBind won't know what type to 
+parse for.
+
 ## Functions get wrapped
 
 Functions get wrapped and returned as a different function. This other function
