@@ -197,7 +197,7 @@ or in another Python script. For example, we can sweep over a bunch
 of batch sizes and learning rates, starting from an initial experiment 
 configuration in a Python script using ArgBind like so:
 
-```
+```python
 from with_argbind import main
 import pathlib
 import argbind
