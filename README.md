@@ -55,6 +55,73 @@ python -m pip install -e .
 - [Example 4: MNIST Script](./examples/mnist/)
 - [Example 5: Extended syntax for .yml files](./examples/yaml)
 
+## Usage
+
+There are six main functions.
+
+- `bind_to_parser`: Binds a functions typed keyword arguments to ArgBind.
+- `parse_args`: Actually parses the arguments into a dictionary.
+- `scope`: Context manager that scopes a dictionary containing function arguments to be used by the functions.
+- `dump_args`: Dumps the args dictionary to a `.yml` file. Used internally when program is called with `--args.save path/to/save.yml`.
+- `load_args`: Loads args from a `.yml` file. Used internally when program is called with `--args.load path/to/load.yml`.
+- `get_used_args`: Gets arguments that have actually been used by call functions up to this point.
+
+Your code with ArgBind generally follows this pattern:
+
+1. Write a function with a good docstring, and typed keyword arguments.
+2. Bind it via `bind_to_parser`.
+3. When program is called, parse the arguments via `parse_args`.
+4. Scope the arguments, and call the bound function within the context block.
+5. Optionally call program with `--args.save` to save the current execution configuration to a `.yml` file or `--args.load` to load arguments from a prior saved execution configuration to run it the same way twice.
+
+In your program, you can call `get_used_args` to inspect the state of the argument dictionary. Here's a minimal example:
+
+```python
+import argbind
+
+@argbind.bind_to_parser()
+def hello(
+    name : str = 'world'
+):
+    """Say hello to someone.
+
+    Parameters
+    ----------
+    name : str, optional
+        Who you're saying hello to, by default 'world'
+    """
+    print("Hello " + name)
+
+if __name__ == "__main__":
+    # Arguments for CLI automatically generated from bound functions under the pattern
+    # function_name.function_arg.
+    args = argbind.parse_args()
+    # When called within a scope, the keyword arguments map to those from CLI or 
+    # from defaults.
+    with argbind.scope(args):
+        hello()
+```
+
+Execution of this could look like:
+
+```
+# Default arguments
+❯ python examples/hello_world/with_argbind.py
+Hello world
+# Binding name from the command line and saving the args.
+❯ python examples/hello_world/with_argbind.py --hello.name=you --args.save=/tmp/args.yml
+Hello you
+# Loading saved arguments.
+❯ python examples/hello_world/with_argbind.py --args.load=/tmp/args.yml
+Hello you
+# Loading saved arguments, and overriding via command line.
+❯ python examples/hello_world/with_argbind.py --args.load=/tmp/args.yml --hello.name=me
+Hello me
+```
+
+For more detailed examples, please check out the [examples](#examples)!
+
+
 ## Design
 
 ArgBind is designed around a decorator that can be used on
@@ -110,101 +177,18 @@ You can call this function like so:
 3 # arg is passed in from two places: `func(arg=3)` and `--func.arg 5`. Former overrides the latter.
 ```
 
+The logic here is that arguments that are bound that are closer to the actual function call get priority. From highest priority, to lowest, it goes:
+
+1. Bound explicitly in Python code
+2. Bound via command line
+3. Bound via .yml file
+4. Bound via default for kwarg
+
+### Note!
+
 The catch is that the function's keyword argument MUST be typed.
 This is required so that ArgBind knows how to parse it from the
 command line.
-
-## Usage
-
-### How to bind a function
-
-Decorate the function with `bind_to_parser`,
-adding it to `PARSE_FUNCS`. The argument
-parser inspects each function in PARSE_FUNCS
-and adds it to the argument flags. For example:
-
-```python
-@bind_to_parser('train', 'val')
-def autoclip(percentile : float = 10.0):
-    print(f'Called autoclip with percentile={percentile}')
-```
-
-This functions arguments are available at:
-
-```bash
-python example.py --autoclip.percentile=N
-```
-
-The function arguments must be annotated with
-their type. Only keyword arguments are included
-in the ArgumentParser.
-
-You can optionally define additional patterns to match
-for different scopes. This will use the arguments
-given on that pattern when the scope is set to that
-pattern. The argument is available on command line at
-`--pattern/func.kwarg`. The patterns used were `train`
-and `val` so the additional arguments are also
-available for binding:
-
-```bash
-python example.py \ 
-    --autoclip.percentile=100 
-    --train/autoclip.percentile=1
-    --val/autoclip.percentile=5
-```
-
-Use with the corresponding code:
-
-```python
-# above this, parse the args
-args = argbind.parse_args()
-with scope(args):
-    autoclip() # prints 100
-with scope(args, 'train'):
-    autoclip() # prints 1
-with scope(args, 'val'):
-    autoclip() # prints 5
-```
-
-### Saving and loading arguments in .yml files
-
-Instead of memorizing complex command line arguments for 
-different experiments or configurations, one can save 
-and load args via .yml files. To use this, use the 
-`--args.save` and `--args.load` arguments to your script.
-The first will save the arguments that were used in
-the run (including all default values for all functions) 
-to a .yml file, for example:
-
-```yml
-stages.run:
-- TRAIN
-- EVALUATE
-- ANALYZE
-```
-
-Then, when you use --args.load with the path to the saved
-file, when the stages function is called, it will run 
-TRAIN, then EVALUATE, then ANALYZE. If you edit it to 
-look like this:
-
-```yml
-stages.run:
-- TRAIN
-- EVALUATE
-```
-
-then only the first two stages will be run. The .yml files are
-saved with a flat structure (no nesting). If you provide command line
-arguments, then only the parameters that are on the command line
-override those in the .yml file. For example:
-
-```bash
-python program.py --args.load args.yml --stages.run TRAIN
-```
-will only run the TRAIN stage, even if args.yml file looks like
-above. 
 
 # Limitations
 
