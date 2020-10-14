@@ -28,7 +28,7 @@ that I've written to be easily adapted so that I could achieve a few goals:
 5. Be able to use scoping patterns, so I can run a function inside of a `train` scope and `test` scope, with different results (e.g. for getting a train dataset and a test dataset).
 
 Nothing out there really fit the bill, so I wrote ArgBind. It's simple, 
-small, and easy to use. To get a feel for how it works, please look at some examples!
+small, and easy to use. To get a feel for how it works, check out [usage](#usage), [design](#design), and [examples](#examples)!
 
 ## Installation
 
