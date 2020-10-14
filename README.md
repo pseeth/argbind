@@ -234,7 +234,8 @@ a path to the function etc.
 ## Only numpydoc is supported
 
 Right now, help text can only be extracted from the docstring if it is written conforming to `numpydoc` style. This will be fixed eventually, hopefully using
-something like https://github.com/rr-/docstring_parser.
+something like https://github.com/rr-/docstring_parser. This would also greatly
+reduce the number of dependencies.
 
 # Releasing
 
@@ -247,8 +248,9 @@ python setup.py sdist
 Upload it to test PyPI:
 
 ```
+pip install twine
 twine upload --repository testpypi dist/*
-pip install -U --index-url https://test.pypi.org/simple/ -U argbind
+pip install -U --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple -U argbind
 ```
 
 Make sure you can install it and it works (e.g. run the examples). Now upload
