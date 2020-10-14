@@ -2,6 +2,7 @@
 
 
 ![Build](https://github.com/pseeth/argbind/workflows/Build/badge.svg) 
+[![PyPI version](https://badge.fury.io/py/argbind.svg)](https://badge.fury.io/py/argbind)
 
 *ArgBind is a simple way to bind arguments to functions to the command line or to .yml files!* It supports scoping of arguments, similar to other frameworks like 
 [Hydra](https://github.com/facebookresearch/hydra) and
