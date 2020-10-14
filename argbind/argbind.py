@@ -2,7 +2,7 @@ import inspect
 from contextlib import contextmanager
 import argparse
 from typing import List, Dict, Tuple
-from numpydoc.docscrape import FunctionDoc
+import docstring_parser
 import textwrap
 import yaml
 import sys
@@ -216,10 +216,10 @@ def parse_args():
         sig = inspect.signature(func)
         prefix = func.__name__
 
-        docstring = FunctionDoc(func)
-        parameter_help = docstring['Parameters']
+        docstring = docstring_parser.parse(func.__doc__)
+        parameter_help = docstring.params
         parameter_help = {
-            x.name: ' '.join(x.desc) for x in parameter_help
+            x.arg_name: x.description for x in parameter_help
         }
 
         f = p.add_argument_group(
@@ -265,8 +265,7 @@ def parse_args():
                         f.add_argument(arg_name, type=arg_type, 
                             default=arg_val, help=arg_help[arg_name])
             
-        desc = docstring['Summary']
-        desc = ' '.join(desc)
+        desc = docstring.short_description
 
         if patterns:
             desc += (

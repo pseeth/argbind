@@ -231,11 +231,10 @@ Functions that are bound must be unique, even if they are in different files. Th
 function name is resolved in the argument parser only using the immediate name, not
 a path to the function etc. 
 
-## Only numpydoc is supported
+## Supported docstring formats
 
-Right now, help text can only be extracted from the docstring if it is written conforming to `numpydoc` style. This will be fixed eventually, hopefully using
-something like https://github.com/rr-/docstring_parser. This would also greatly
-reduce the number of dependencies.
+ArgBind uses [docstring-parser](https://github.com/rr-/docstring_parser), and so
+the only supported styles are: ReST, Google, and Numpydoc-style docstrings.
 
 # Releasing
 

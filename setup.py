@@ -12,7 +12,7 @@ long_description = (here / 'README.md').read_text(encoding='utf-8')
 
 setup(
     name='argbind',
-    version='0.1.0', 
+    version='0.1.1', 
     description='Simple way to bind function arguments to the command line.',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -34,7 +34,7 @@ setup(
     python_requires='>=3.5, <4',
     install_requires=[
         'pyyaml',
-        'numpydoc'
+        'docstring-parser'
     ],
     extras_require={ 
         'test': ['pytest'],
