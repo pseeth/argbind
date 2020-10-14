@@ -161,7 +161,7 @@ arguments, then only the parameters that are on the command line
 override those in the .yml file. For example:
 
 ```bash
-    python program.py --args.load args.yml --stages.run TRAIN
+python program.py --args.load args.yml --stages.run TRAIN
 ```
 will only run the TRAIN stage, even if args.yml file looks like
 above. 
