@@ -8,8 +8,7 @@
 *ArgBind is a simple way to bind arguments to functions to the command line or to .yml files!* It supports scoping of arguments, similar to other frameworks like 
 [Hydra](https://github.com/facebookresearch/hydra) and
 [gin-config](https://github.com/google/gin-config).
-ArgBind is *very* small, can be used to make super simple command
-line programs with help text loaded directly from docstrings, and allows you
+ArgBind is *very* small, can be used to make complex and well-documented command line programs, and allows you
 to configure program execution from .yml files. Best of all, it's less than 300 lines of code!
 
 Scroll down to see some [examples](#examples). Please also look at the 
@@ -53,7 +52,7 @@ python -m pip install -e .
 - [Example 2: Scope patterns](./examples/scoping/)
 - [Example 3: Typing](./examples/typing/)
 - [Example 4: MNIST Script](./examples/mnist/)
-- [Example 5: Extended syntax for .yml files](./examples/yaml)
+- [Example 5: Loading, saving, and using .yml files](./examples/yaml)
 
 ## Usage
 
@@ -119,7 +118,7 @@ Hello you
 Hello me
 ```
 
-For more detailed examples, please check out the [examples](#examples)!
+Please check out the [examples](#examples) for more details!
 
 
 ## Design
