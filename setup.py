@@ -37,7 +37,7 @@ setup(
         'docstring-parser'
     ],
     extras_require={ 
-        'tests': ['pytest', 'pytest-cov'],
+        'tests': ['pytest', 'pytest-cov', 'torch', 'torchvision'],
         'examples': ['torch', 'torchvision']
     },
 )
