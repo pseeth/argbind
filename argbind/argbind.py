@@ -1,7 +1,7 @@
 import inspect
 from contextlib import contextmanager
 import argparse
-from typing import List, Dict
+from typing import List, Dict, Tuple
 from numpydoc.docscrape import FunctionDoc
 import textwrap
 import yaml
@@ -160,6 +160,14 @@ class str_to_list():
         _values = [self._type(v) for v in _values]
         return _values
 
+class str_to_tuple():
+    def __init__(self, _type_list):
+        self._type_list = _type_list
+    def __call__(self, values):
+        _values = values.split(' ')
+        _values = [self._type_list[i](v) for i, v in enumerate(_values)]
+        return _values
+
 class str_to_dict():
     def __init__(self):
         pass
@@ -248,6 +256,11 @@ def parse_args():
                     elif arg_type is Dict:
                         f.add_argument(arg_name, type=str_to_dict(), 
                             default=arg_val, help=arg_help[arg_name])
+                    elif hasattr(arg_type, '__origin__'):
+                        if arg_type.__origin__ is tuple:
+                            _type_list = arg_type.__args__
+                            f.add_argument(arg_name, type=str_to_tuple(_type_list), 
+                                default=arg_val, help=arg_help[arg_name])
                     else:
                         f.add_argument(arg_name, type=arg_type, 
                             default=arg_val, help=arg_help[arg_name])

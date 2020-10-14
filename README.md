@@ -11,8 +11,9 @@ Scroll down to see some [examples](#examples).
 
 ## Design
 
-ArgBind is designed around a function decorator that can be applied to
-any function. The typed keyword arguments to that function are 
+ArgBind is designed around a decorator that can be used on
+functions the user wants to expose to command line or to a .yml file.
+The typed keyword arguments to that function are 
 then bound to a dictionary. When the function is called, 
 each keyword argument is looked up in the dictionary and its
 value is replaced with the corresponding value in the dictionary. The
@@ -71,6 +72,7 @@ command line.
 
 - [Example 1: Hello World](./examples/hello_world/README.md)
 - [Example 2: Scope patterns](./examples/scoping/README.md)
+- [Example 3: Typing](./examples/typing/README.md)
 
 ## Usage
 
