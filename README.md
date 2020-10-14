@@ -74,6 +74,7 @@ command line.
 - [Example 2: Scope patterns](./examples/scoping/)
 - [Example 3: Typing](./examples/typing/)
 - [Example 4: MNIST Script](./examples/mnist/)
+- [Example 5: Extended syntax for .yml files](./examples/yaml)
 
 ## Usage
 

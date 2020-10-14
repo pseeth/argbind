@@ -1,0 +1,3 @@
+$include:
+  - examples/yaml/conf/base.yml
+func.arg4: from exp1

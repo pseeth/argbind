@@ -1,0 +1,9 @@
+$include:
+  - examples/yaml/conf/base.yml
+  - examples/yaml/conf/exp1.yml
+
+$vars:
+  reuse_arg: from exp2
+
+func.arg1: $reuse_arg
+func.arg2: $reuse_arg
