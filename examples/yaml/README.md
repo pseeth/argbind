@@ -100,7 +100,7 @@ Argument 4: from base
 
 Now, let's try `conf/exp1.yml` which has the following contents:
 
-```
+```yaml
 $include:
   - examples/yaml/conf/base.yml
 func.arg4: from exp1
@@ -143,7 +143,7 @@ Only the latest `$vars` will be used, if multiple files are included.
 
 Let's take a look at `exp2.yml`:
 
-```
+```yaml
 $include:
   - examples/yaml/conf/base.yml
   - examples/yaml/conf/exp1.yml
