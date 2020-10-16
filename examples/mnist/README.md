@@ -56,7 +56,7 @@ all the arguments that we want, along with a numpydoc
 docstring that describes each keyword argument:
 
 ```python
-@argbind.bind_to_parser()
+@argbind.bind()
 def main(
     batch_size : int = 64,
     test_batch_size : int = 1000,
@@ -100,7 +100,7 @@ The defaults for each keyword argument are set at the function
 definition. The docstring describes each parameter in the 
 same way as the help text of the argument parser. ArgBind
 parses the function signature and docstring when 
-`argbind.bind_to_parser()` is called on `main`, leading to a 
+`argbind.bind()` is called on `main`, leading to a 
 program with the following usage:
 
 ```

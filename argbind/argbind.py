@@ -49,7 +49,7 @@ def scope(parsed_args, pattern=''):
     ARGS = old_args
     PATTERN = old_pattern
 
-def bind_to_parser(*patterns, no_global=False):
+def bind(*patterns, no_global=False):
     """
     Wrap the function so it looks in ARGS (managed 
     by the scope context manager) for keyword 
@@ -85,6 +85,10 @@ def bind_to_parser(*patterns, no_global=False):
         return cmd_func
     
     return decorator
+
+# Backwards compat.
+# For scripts written with argbind<=0.1.3.
+bind_to_parser = bind
 
 def parse_dict_to_str(x):
     return ', '.join([f'{k}={v}' for k, v in x.items()])

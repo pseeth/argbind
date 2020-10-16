@@ -22,7 +22,7 @@ Generated arguments for function hello:
 """
 import argbind
 
-@argbind.bind_to_parser()
+@argbind.bind()
 def hello(
     name : str = 'world'
 ):

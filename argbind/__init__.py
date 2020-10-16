@@ -1,5 +1,6 @@
 from .argbind import (
-    bind_to_parser, 
+    bind, 
+    bind_to_parser, # For backwards compat.
     parse_args,
     dump_args,
     load_args,

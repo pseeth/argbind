@@ -1,6 +1,6 @@
 import argbind
 
-@argbind.bind_to_parser('train', 'val', 'test')
+@argbind.bind('train', 'val', 'test')
 def dataset(
     some_positional_arg,
     folder : str = 'default',

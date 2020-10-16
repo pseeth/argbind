@@ -1,7 +1,7 @@
 import argbind
 from typing import List, Dict, Tuple
 
-@argbind.bind_to_parser()
+@argbind.bind()
 def func(
     str_arg : str = 'string',
     int_arg : int = 1,

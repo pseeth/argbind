@@ -4,6 +4,7 @@
 ![Build](https://github.com/pseeth/argbind/workflows/Build/badge.svg) 
 [![PyPI version](https://badge.fury.io/py/argbind.svg)](https://badge.fury.io/py/argbind)
 [![codecov](https://codecov.io/gh/pseeth/argbind/branch/main/graph/badge.svg?token=BWI0FHZI5H)](undefined)
+![Lines of code](https://img.shields.io/tokei/lines/github/pseeth/argbind)
 
 *ArgBind is a simple way to bind arguments to functions to the command line or to .yml files!* It supports scoping of arguments, similar to other frameworks like 
 [Hydra](https://github.com/facebookresearch/hydra) and
@@ -58,7 +59,7 @@ python -m pip install -e .
 
 There are six main functions.
 
-- `bind_to_parser`: Binds a functions typed keyword arguments to ArgBind.
+- `bind`: Binds a functions typed keyword arguments to ArgBind.
 - `parse_args`: Actually parses the arguments into a dictionary.
 - `scope`: Context manager that scopes a dictionary containing function arguments to be used by the functions.
 - `dump_args`: Dumps the args dictionary to a `.yml` file. Used internally when program is called with `--args.save path/to/save.yml`.
@@ -68,7 +69,7 @@ There are six main functions.
 Your code with ArgBind generally follows this pattern:
 
 1. Write a function with a good docstring, and typed keyword arguments.
-2. Bind it via `bind_to_parser`.
+2. Bind it via `bind`.
 3. When program is called, parse the arguments via `parse_args`.
 4. Scope the arguments, and call the bound function within the context block.
 5. Optionally call program with `--args.save` to save the current execution configuration to a `.yml` file or `--args.load` to load arguments from a prior saved execution configuration to run it the same way twice.
@@ -78,7 +79,7 @@ In your program, you can call `get_used_args` to inspect the state of the argume
 ```python
 import argbind
 
-@argbind.bind_to_parser()
+@argbind.bind()
 def hello(
     name : str = 'world'
 ):
@@ -178,7 +179,7 @@ dictionary that the function looks for values in is controlled by
 ```python
 import argbind 
 
-@argbind.bind_to_parser()
+@argbind.bind()
 def func(arg : str = 'default'):
     print(arg)
 

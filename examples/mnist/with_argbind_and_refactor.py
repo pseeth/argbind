@@ -32,7 +32,7 @@ class Net(nn.Module):
         output = F.log_softmax(x, dim=1)
         return output
 
-@argbind.bind_to_parser()
+@argbind.bind()
 def train(
     model, 
     device, 
@@ -85,7 +85,7 @@ def test(model, device, test_loader):
         test_loss, correct, len(test_loader.dataset),
         100. * correct / len(test_loader.dataset)))
 
-@argbind.bind_to_parser('train', 'test')
+@argbind.bind('train', 'test')
 def dataset(
     device,
     folder : str = '../data',
@@ -120,7 +120,7 @@ def dataset(
     dataloader = torch.utils.data.DataLoader(dataset, **kwargs)
     return dataloader
 
-@argbind.bind_to_parser()
+@argbind.bind()
 def optimizer(
     model,
     lr : float = 1.0
@@ -134,7 +134,7 @@ def optimizer(
     """
     return optim.Adadelta(model.parameters(), lr=lr)
 
-@argbind.bind_to_parser()
+@argbind.bind()
 def scheduler(
     optimizer,
     step_size : int = 1,
@@ -151,7 +151,7 @@ def scheduler(
     """
     return StepLR(optimizer, step_size=1, gamma=gamma)
 
-@argbind.bind_to_parser()
+@argbind.bind()
 def main(
     args,
     epochs : int = 14,

@@ -68,7 +68,7 @@ def test(model, device, test_loader):
         test_loss, correct, len(test_loader.dataset),
         100. * correct / len(test_loader.dataset)))
 
-@argbind.bind_to_parser()
+@argbind.bind()
 def main(
     batch_size : int = 64,
     test_batch_size : int = 1000,

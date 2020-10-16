@@ -1,6 +1,6 @@
 import argbind 
 
-@argbind.bind_to_parser()
+@argbind.bind()
 def func(arg : str = 'default'):
     print(arg)
 
