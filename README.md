@@ -10,8 +10,8 @@
 *ArgBind is a simple way to bind arguments to functions to the command line or to .yml files!* It supports scoping of arguments, similar to other frameworks like 
 [Hydra](https://github.com/facebookresearch/hydra) and
 [gin-config](https://github.com/google/gin-config).
-ArgBind is *very* small, can be used to make complex and well-documented command line programs, and allows you
-to configure program execution from .yml files. Best of all, it's just around 300 lines of code!
+ArgBind is *very* small (only ~300 lines of code, in one file), can be used to make complex and well-documented command line programs, and allows 
+you to configure program execution from .yml files.
 
 Scroll down to see some [examples](#examples). Please also look at the 
 current known [limitations](#limitations) of ArgBind.
@@ -29,7 +29,8 @@ that I've written to be easily adapted so that I could achieve a few goals:
 4. Be able to specify arguments from the command line directly to various functions.
 5. Be able to use scoping patterns, so I can run a function inside of a `train` scope and `test` scope, with different results (e.g. for getting a train dataset and a test dataset).
 
-Nothing out there really fit the bill, so I wrote ArgBind. It's simple, 
+Nothing out there really fit the bill, so I wrote ArgBind. If you have 
+an `argparse` based script, converting it to ArgBind should be very quick! ArgBind is simple, 
 small, and easy to use. To get a feel for how it works, check out [usage](#usage), [design](#design), and [examples](#examples)!
 
 ## Installation
