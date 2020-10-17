@@ -1,0 +1,84 @@
+usage: multistage.py [-h] [--args.save ARGS.SAVE] [--args.load ARGS.LOAD]
+                     [--args.debug ARGS.DEBUG] [--output.folder OUTPUT.FOLDER]
+                     [--download.folder DOWNLOAD.FOLDER]
+                     [--preprocess.src_folder PREPROCESS.SRC_FOLDER]
+                     [--preprocess.dst_folder PREPROCESS.DST_FOLDER]
+                     [--train.folder TRAIN.FOLDER]
+                     [--train.epochs TRAIN.EPOCHS] [--train.lr TRAIN.LR]
+                     [--train.model_type TRAIN.MODEL_TYPE]
+                     [--train.model_path TRAIN.MODEL_PATH]
+                     [--evaluate.model_path EVALUATE.MODEL_PATH]
+                     [--evaluate.folder EVALUATE.FOLDER]
+                     [--evaluate.results_folder EVALUATE.RESULTS_FOLDER]
+                     [--analyze.results_folder ANALYZE.RESULTS_FOLDER]
+                     [--run.stages RUN.STAGES]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --args.save ARGS.SAVE
+                        Path to save all arguments used to run script to.
+  --args.load ARGS.LOAD
+                        Path to load arguments from, stored as a .yml file.
+  --args.debug ARGS.DEBUG
+                        Print arguments as they are passed to each function.
+
+Generated arguments for function output:
+  Controls the output folder where everything gets saved.
+
+  --output.folder OUTPUT.FOLDER
+                        Output folder, everything is saved relative to this folder,
+                        by default '.'
+
+Generated arguments for function download:
+  Download data to folder.
+
+  --download.folder DOWNLOAD.FOLDER
+                        Absolute path to folder to download data to, by default
+                        '/data/raw'
+
+Generated arguments for function preprocess:
+  Preprocess data.
+
+  --preprocess.src_folder PREPROCESS.SRC_FOLDER
+                        Absolute path to raw data, by default '/data/raw'
+  --preprocess.dst_folder PREPROCESS.DST_FOLDER
+                        Absolute path where preprocessed data is placed, by default
+                        '/data/processed'
+
+Generated arguments for function train:
+  Train the model.
+
+  --train.folder TRAIN.FOLDER
+                        Folder to train from, by default '/data/processed/train/'
+  --train.epochs TRAIN.EPOCHS
+                        Number of epochs, by default 50
+  --train.lr TRAIN.LR   Learning rate, by default 1e-3
+  --train.model_type TRAIN.MODEL_TYPE
+                        Type of model, by default 'conv'
+  --train.model_path TRAIN.MODEL_PATH
+                        Where to save model to, by default 'checkpoints/model.pth'
+
+Generated arguments for function evaluate:
+  Evaluate the model.
+
+  --evaluate.model_path EVALUATE.MODEL_PATH
+                        Path to model to evaluate, by default
+                        'checkpoints/model.pth'
+  --evaluate.folder EVALUATE.FOLDER
+                        Folder containing data to evaluate model on, by default
+                        '/data/processed/test/'
+  --evaluate.results_folder EVALUATE.RESULTS_FOLDER
+                        Folder to save results into, by default './results'
+
+Generated arguments for function analyze:
+  Analyze model performance, make plots.
+
+  --analyze.results_folder ANALYZE.RESULTS_FOLDER
+                        Folder where results are, by default './results'
+
+Generated arguments for function run:
+  Run stages.
+
+  --run.stages RUN.STAGES
+                        List of stages to run, by default  ['download',
+                        'preprocess', 'train',   'evaluate', 'analyze']
