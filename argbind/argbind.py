@@ -9,6 +9,7 @@ import sys
 import os
 from pathlib import Path
 import ast
+from functools import wraps
 
 PARSE_FUNCS = {}
 ARGS = {}
@@ -58,6 +59,8 @@ def bind(*patterns, no_global=False):
 
     def decorator(func):
         PARSE_FUNCS[func.__name__] = (func, patterns, no_global)
+        
+        @wraps(func)
         def cmd_func(*args, **kwargs):
             prefix = func.__name__
             sig = inspect.signature(func)

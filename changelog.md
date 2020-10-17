@@ -1,4 +1,7 @@
 # Changelog
+## v0.1.5
+- Using `functools.wraps` in the `bind` decorator. This decorates the 
+  function without changing its name.
 
 ## v0.1.4
 - `bind_to_parser` renamed to `bind`. `bind_to_parser` still exists

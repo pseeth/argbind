@@ -255,17 +255,6 @@ in functions. Positional arguments are not bound. Untyped keyword
 arguments cannot be bound, because ArgBind won't know what type to 
 parse for.
 
-## Functions get wrapped
-
-Functions get wrapped and returned as a different function. This other function
-is called `cmd_func`, and it's where the magic happens. `cmd_func` does a lookup in
-the currently scoped argument dictionary to find matching keyword arguments to
-the function it wrapped. Then it calls the function using the matched keyword arguments.
-So, if you bind a function, and then inspect it, you won't see the original function.
-Instead, you'll see `cmd_func`. This can have adverse effects if you bind a class with
-ArgBind, as the actual class will become a function! For now (and possibly forever), 
-don't bind classes, bind only functions.
-
 ## Bound function names should be unique
 
 Functions that are bound must be unique, even if they are in different files. The 
