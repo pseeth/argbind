@@ -246,24 +246,6 @@ Generating plots for ./results
 Returning to original folder
 ```
 
-What if we specify a stage that doesn't exist? The `run_stages` function is written 
-in the script to throw a helpful error:
-
-```
-❯ python examples/multistage/multistage.py --output.folder /tmp/output --run.stages "non_existent_stage"
-Making output folder /tmp/output.
-Switched working directory to /tmp/output
-Returning to original folder
-Traceback (most recent call last):
-  File "examples/multistage/multistage.py", line 162, in <module>
-    run()
-  File "/Users/prem/research/argbind/argbind/argbind.py", line 84, in cmd_func
-    return func(*args, **kwargs)
-  File "examples/multistage/multistage.py", line 153, in run
-    raise ValueError(
-ValueError: Requested stage non_existent_stage not in known stages ['download', 'preprocess', 'train', 'evaluate', 'analyze']
-```
-
 Finally, save that last command to a .yml so we can run it again if we want:
 
 ```
@@ -318,6 +300,24 @@ STAGE: ANALYZE
 Generating plots for ./results
 
 Returning to original folder
+```
+
+What if we specify a stage that doesn't exist? The `run_stages` function is written 
+in the script to throw a helpful error:
+
+```
+❯ python examples/multistage/multistage.py --output.folder /tmp/output --run.stages "non_existent_stage"
+Making output folder /tmp/output.
+Switched working directory to /tmp/output
+Returning to original folder
+Traceback (most recent call last):
+  File "examples/multistage/multistage.py", line 162, in <module>
+    run()
+  File "/Users/prem/research/argbind/argbind/argbind.py", line 84, in cmd_func
+    return func(*args, **kwargs)
+  File "examples/multistage/multistage.py", line 153, in run
+    raise ValueError(
+ValueError: Requested stage non_existent_stage not in known stages ['download', 'preprocess', 'train', 'evaluate', 'analyze']
 ```
 
 This is one way to structure a multi-stage program with ArgBind. 
