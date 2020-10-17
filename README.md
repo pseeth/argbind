@@ -55,6 +55,7 @@ python -m pip install -e .
 - [Example 3: Typing](./examples/typing/)
 - [Example 4: MNIST Script](./examples/mnist/)
 - [Example 5: Loading, saving, and using .yml files](./examples/yaml)
+- [Example 6: Multi-stage programs](./examples/multistage)
 
 ## Usage
 
