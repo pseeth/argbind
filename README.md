@@ -1,5 +1,6 @@
 # ArgBind
 
+**Build CLIs via docstrings and type annotations, with YAML support.**
 
 ![Build](https://github.com/pseeth/argbind/workflows/Build/badge.svg) 
 [![PyPI version](https://badge.fury.io/py/argbind.svg)](https://badge.fury.io/py/argbind)
