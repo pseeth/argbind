@@ -51,7 +51,7 @@ def run(stages : List[str] = STAGES):
             stage_fn()
 ```
 
-- `output()`: The script switches working directories to the specified folder. The rest of the script can then use relative paths with respect to the specified output folder. This is a context manager that is bound via ArgBind!
+- `output()`: The script switches working directories to the specified folder. The rest of the script can then use relative paths with respect to the specified output folder. This is a context manager that is bound via ArgBind! While not the focus of this example, it's a nifty function to use in experiment code.
 
 Let's look at the help for this script:
 
