@@ -58,6 +58,7 @@ python -m pip install -e .
 - [Example 4: MNIST Script](./examples/mnist/)
 - [Example 5: Loading, saving, and using .yml files](./examples/yaml)
 - [Example 6: Multi-stage programs](./examples/multistage)
+- [Example 7: Mimic more traditional CLI, without `func.arg` notation](./examples/without_prefix)
 
 ## Usage
 

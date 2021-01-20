@@ -50,7 +50,7 @@ def scope(parsed_args, pattern=''):
     ARGS = old_args
     PATTERN = old_pattern
 
-def bind(*patterns, no_global=False):
+def bind(*patterns, without_prefix=False):
     """
     Wrap the function so it looks in ARGS (managed 
     by the scope context manager) for keyword 
@@ -58,7 +58,7 @@ def bind(*patterns, no_global=False):
     """
 
     def decorator(func):
-        PARSE_FUNCS[func.__name__] = (func, patterns, no_global)
+        PARSE_FUNCS[func.__name__] = (func, patterns, without_prefix)
         
         @wraps(func)
         def cmd_func(*args, **kwargs):
@@ -70,7 +70,7 @@ def bind(*patterns, no_global=False):
                 arg_type = val.annotation
                 arg_val = val.default
                 if arg_val is not inspect.Parameter.empty:
-                    arg_name = f'{prefix}.{key}'
+                    arg_name = f'{prefix}.{key}' if not without_prefix else f'{key}'
                     if arg_name in ARGS and key not in kwargs:
                         cmd_kwargs[key] = ARGS[arg_name]
                         use_key = arg_name
@@ -216,7 +216,7 @@ def parse_args():
 
     # Add kwargs from function to parser
     for func_name in PARSE_FUNCS:
-        func, patterns, no_global = PARSE_FUNCS[func_name]
+        func, patterns, without_prefix = PARSE_FUNCS[func_name]
         sig = inspect.signature(func)
         prefix = func.__name__
 
@@ -240,11 +240,16 @@ def parse_args():
                 help_text = ''
                 if key in parameter_help:
                     help_text = textwrap.fill(parameter_help[key], width=HELP_WIDTH)
-                if not no_global:
+                if not without_prefix:
                     arg_names.append(f'--{prefix}.{key}')
-                    arg_help[arg_names[-1]] = help_text
+                else:
+                    arg_names.append(f'--{key}')
+                arg_help[arg_names[-1]] = help_text
                 for pattern in patterns:
-                    arg_names.append(f'--{pattern}/{prefix}.{key}')
+                    if not without_prefix:
+                        arg_names.append(f'--{pattern}/{prefix}.{key}')
+                    else:
+                        arg_names.append(f'--{pattern}/{key}')
                     arg_help[arg_names[-1]] = argparse.SUPPRESS
                 for arg_name in arg_names:
                     inner_types = [str, int, float, bool]
@@ -273,11 +278,16 @@ def parse_args():
         if desc is None: desc = ''
 
         if patterns:
+            if not without_prefix:
+                scope_pattern = f"--{patterns[0]}/{prefix}.{key}"
+            else:
+                scope_pattern = f"--{patterns[0]}/{key}"
+        
             desc += (
                 f" Additional scope patterns: {', '.join(list(patterns))}. "
                 "Use these by prefacing any of the args below with one "
                 "of these patterns. For example: "
-                f"--{patterns[0]}/{prefix}.{key} VALUE."
+                f"{scope_pattern} VALUE."
             )
 
         desc = textwrap.fill(desc, width=HELP_WIDTH)

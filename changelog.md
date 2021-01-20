@@ -1,4 +1,10 @@
 # Changelog
+## v0.1.6
+- Added `without_prefix` option to `bind`, which exposes the keyword arguments
+  without the function name as the prefix, if `without_prefix=True`. There was 
+  an unused version of this in its place called `no_global` which has now been
+  removed.
+
 ## v0.1.5
 - Using `functools.wraps` in the `bind` decorator. This decorates the 
   function without changing its name.
