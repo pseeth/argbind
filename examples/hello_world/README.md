@@ -70,7 +70,4 @@ Hello test
 Hello test
 ❯ python examples/hello_world/with_argbind.py --args.load /tmp/saved_args.yml
 Hello test
-❯ python examples/hello_world/with_argbind.py --args.load /tmp/saved_args.yml --args.debug=1
-hello <- name=test
-Hello test
 ```

@@ -324,27 +324,48 @@ For our final trick, let's look at the script with `--args.debug 1`:
 
 ```
 ❯ python examples/multistage/multistage.py --output.folder /tmp/output --args.debug 1
-run <- stages=['download', 'preprocess', 'train', 'evaluate', 'analyze']
-output <- folder=/tmp/output
+run(
+  stages : list = ['download', 'preprocess', 'train', 'evaluate', 'analyze']
+)
+output(
+  folder : str = /tmp/output
+)
 Making output folder /tmp/output.
 Switched working directory to /tmp/output
-download <- folder=/data/raw
+download(
+  folder : str = /data/raw
+)
 STAGE: DOWNLOAD
 Downloading data to /data/raw
 
-preprocess <- src_folder=/data/raw, dst_folder=/data/processed
+preprocess(
+  src_folder : str = /data/raw
+  dst_folder : str = /data/processed
+)
 STAGE: PREPROCESS
 Preprocessing /data/raw into /data/processed
 
-train <- folder=/data/processed/train/, epochs=50, lr=0.001, model_type=conv, model_path=checkpoints/model.pth
+train(
+  folder : str = /data/processed/train/
+  epochs : int = 50
+  lr : float = 0.001
+  model_type : str = conv
+  model_path : str = checkpoints/model.pth
+)
 STAGE: TRAIN
 Training model conv on data in /data/processed/train/ for 50 epochs, with learning rate of 0.001
 
-evaluate <- model_path=checkpoints/model.pth, folder=/data/processed/test/, results_folder=./results
+evaluate(
+  model_path : str = checkpoints/model.pth
+  folder : str = /data/processed/test/
+  results_folder : str = ./results
+)
 STAGE: EVALUATE
 Evaluating model checkpoints/model.pth on /data/processed/test/, saving results to ./results
 
-analyze <- results_folder=./results
+analyze(
+  results_folder : str = ./results
+)
 STAGE: ANALYZE
 Generating plots for ./results
 
