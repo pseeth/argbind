@@ -1,4 +1,8 @@
 # Changelog
+## v0.1.7
+- Updated the behavior of `args.debug` to create a prettier and more readable 
+  output.
+
 ## v0.1.6
 - Added `without_prefix` option to `bind`, which exposes the keyword arguments
   without the function name as the prefix, if `without_prefix=True`. There was 

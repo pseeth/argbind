@@ -1,5 +1,25 @@
-main <- epochs=0, no_cuda=False, seed=1, save_model=False
-train/dataset <- folder=../data, split=train, batch_size=64
-test/dataset <- folder=../data, split=train, batch_size=64
-optimizer <- lr=1.0
-scheduler <- step_size=1, gamma=0.7
+main(
+  epochs : int = 0
+  no_cuda : bool = False
+  seed : int = 1
+  save_model : bool = False
+)
+dataset(
+  # scope = train
+  folder : str = ../data
+  split : str = train
+  batch_size : int = 64
+)
+dataset(
+  # scope = test
+  folder : str = ../data
+  split : str = train
+  batch_size : int = 64
+)
+optimizer(
+  lr : float = 1.0
+)
+scheduler(
+  step_size : int = 1
+  gamma : float = 0.7
+)

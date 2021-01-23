@@ -90,3 +90,25 @@ func.tuple_arg: !!python/tuple
 - 1.0
 - number1
 ```
+
+Finally, in debug mode:
+
+```
+❯ python examples/typing/with_argbind.py --func.str_arg "test" --func.int_arg 10 --func.dict_arg "x=5 y=a" --func.list_int_arg "1 2 3" --func.list_str_arg "a b c" --func.bool_arg --func.tuple_arg "1 1.0 number1" --args.save /tmp/saved_args.yml --args.debug=1
+func(
+  str_arg : str = test
+  int_arg : int = 10
+  dict_arg : dict = {'x': 5, 'y': 'a'}
+  list_int_arg : list = [1, 2, 3]
+  list_str_arg : list = ['a', 'b', 'c']
+  bool_arg : bool = True
+  tuple_arg : tuple = (1, 1.0, 'number1')
+)
+String argument - type: <class 'str'>, val: test
+Integer argument - type: <class 'int'>, val: 10
+Dictionary argument - type: <class 'dict'>, val: {'x': 5, 'y': 'a'}
+List of ints argument - type: <class 'list'>, val: [1, 2, 3]
+List of strings argument - type: <class 'list'>, val: ['a', 'b', 'c']
+Boolean argument - type: <class 'bool'>, val: True
+Tuple of (int, float, str) - type: <class 'tuple'>, val: (1, 1.0, 'number1')
+```

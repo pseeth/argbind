@@ -1,8 +1,19 @@
-dataset <- folder=default
+dataset(
+  folder : str = default
+)
 default
-train/dataset <- folder=default
+dataset(
+  # scope = train
+  folder : str = default
+)
 default
-val/dataset <- folder=default
+dataset(
+  # scope = val
+  folder : str = default
+)
 default
-test/dataset <- folder=default
+dataset(
+  # scope = test
+  folder : str = default
+)
 default

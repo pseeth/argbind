@@ -50,6 +50,15 @@ def scope(parsed_args, pattern=''):
     ARGS = old_args
     PATTERN = old_pattern
 
+def _format_func_debug(func_name, func_kwargs, scope=None):
+    formatted = [f"{func_name}("]
+    if scope is not None:
+        formatted.append(f"  # scope = {scope}")
+    for key, val in func_kwargs.items():
+        formatted.append(f"  {key} : {type(val).__name__} = {val}")
+    formatted.append(")")
+    return '\n'.join(formatted)
+
 def bind(*patterns, without_prefix=False):
     """
     Wrap the function so it looks in ARGS (managed 
@@ -81,9 +90,11 @@ def bind(*patterns, without_prefix=False):
             kwargs.update(cmd_kwargs)
             if 'args.debug' not in ARGS: ARGS['args.debug'] = False
             if ARGS['args.debug'] or DEBUG:
-                _prefix = f"{PATTERN}/{prefix}" if PATTERN else prefix
-                print(f"{_prefix} <- {parse_dict_to_str(kwargs)}")
-
+                if PATTERN: 
+                    scope = PATTERN
+                else:
+                    scope = None
+                print(_format_func_debug(prefix, kwargs, scope))
             return func(*args, **kwargs)
         return cmd_func
     
@@ -92,9 +103,6 @@ def bind(*patterns, without_prefix=False):
 # Backwards compat.
 # For scripts written with argbind<=0.1.3.
 bind_to_parser = bind
-
-def parse_dict_to_str(x):
-    return ', '.join([f'{k}={v}' for k, v in x.items()])
 
 def get_used_args():
     """

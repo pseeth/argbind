@@ -195,7 +195,18 @@ think is happening is happening:
 
 ```
 ❯ python examples/mnist/with_argbind.py --args.debug 1
-main <- batch_size=64, test_batch_size=1000, epochs=14, lr=1.0, gamma=0.7, no_cuda=False, dry_run=False, seed=1, log_interval=10, save_model=False
+main(
+  batch_size : int = 64
+  test_batch_size : int = 1000
+  epochs : int = 14
+  lr : float = 1.0
+  gamma : float = 0.7
+  no_cuda : bool = False
+  dry_run : bool = False
+  seed : int = 1
+  log_interval : int = 10
+  save_model : bool = False
+)
 ```
 
 Additionally, note that in this version of the script, the experiment
@@ -235,31 +246,130 @@ This script produces the following output (when `args.debug = True`) as above:
 ```
 ❯ python examples/mnist/sweep_argbind.py
 Experiment 1, batch size is 16, learning rate is 0.1.
-main <- batch_size=16, test_batch_size=1000, epochs=0, lr=0.1, gamma=0.7, no_cuda=False, dry_run=False, seed=1, log_interval=10, save_model=False
+main(
+  batch_size : int = 16
+  test_batch_size : int = 1000
+  epochs : int = 0
+  lr : float = 0.1
+  gamma : float = 0.7
+  no_cuda : bool = False
+  dry_run : bool = False
+  seed : int = 1
+  log_interval : int = 10
+  save_model : bool = False
+)
 
 Experiment 2, batch size is 16, learning rate is 0.5.
-main <- batch_size=16, test_batch_size=1000, epochs=0, lr=0.5, gamma=0.7, no_cuda=False, dry_run=False, seed=1, log_interval=10, save_model=False
+main(
+  batch_size : int = 16
+  test_batch_size : int = 1000
+  epochs : int = 0
+  lr : float = 0.5
+  gamma : float = 0.7
+  no_cuda : bool = False
+  dry_run : bool = False
+  seed : int = 1
+  log_interval : int = 10
+  save_model : bool = False
+)
 
 Experiment 3, batch size is 16, learning rate is 1.0.
-main <- batch_size=16, test_batch_size=1000, epochs=0, lr=1.0, gamma=0.7, no_cuda=False, dry_run=False, seed=1, log_interval=10, save_model=False
+main(
+  batch_size : int = 16
+  test_batch_size : int = 1000
+  epochs : int = 0
+  lr : float = 1.0
+  gamma : float = 0.7
+  no_cuda : bool = False
+  dry_run : bool = False
+  seed : int = 1
+  log_interval : int = 10
+  save_model : bool = False
+)
 
 Experiment 4, batch size is 32, learning rate is 0.1.
-main <- batch_size=32, test_batch_size=1000, epochs=0, lr=0.1, gamma=0.7, no_cuda=False, dry_run=False, seed=1, log_interval=10, save_model=False
+main(
+  batch_size : int = 32
+  test_batch_size : int = 1000
+  epochs : int = 0
+  lr : float = 0.1
+  gamma : float = 0.7
+  no_cuda : bool = False
+  dry_run : bool = False
+  seed : int = 1
+  log_interval : int = 10
+  save_model : bool = False
+)
 
 Experiment 5, batch size is 32, learning rate is 0.5.
-main <- batch_size=32, test_batch_size=1000, epochs=0, lr=0.5, gamma=0.7, no_cuda=False, dry_run=False, seed=1, log_interval=10, save_model=False
+main(
+  batch_size : int = 32
+  test_batch_size : int = 1000
+  epochs : int = 0
+  lr : float = 0.5
+  gamma : float = 0.7
+  no_cuda : bool = False
+  dry_run : bool = False
+  seed : int = 1
+  log_interval : int = 10
+  save_model : bool = False
+)
 
 Experiment 6, batch size is 32, learning rate is 1.0.
-main <- batch_size=32, test_batch_size=1000, epochs=0, lr=1.0, gamma=0.7, no_cuda=False, dry_run=False, seed=1, log_interval=10, save_model=False
+main(
+  batch_size : int = 32
+  test_batch_size : int = 1000
+  epochs : int = 0
+  lr : float = 1.0
+  gamma : float = 0.7
+  no_cuda : bool = False
+  dry_run : bool = False
+  seed : int = 1
+  log_interval : int = 10
+  save_model : bool = False
+)
 
 Experiment 7, batch size is 64, learning rate is 0.1.
-main <- batch_size=64, test_batch_size=1000, epochs=0, lr=0.1, gamma=0.7, no_cuda=False, dry_run=False, seed=1, log_interval=10, save_model=False
+main(
+  batch_size : int = 64
+  test_batch_size : int = 1000
+  epochs : int = 0
+  lr : float = 0.1
+  gamma : float = 0.7
+  no_cuda : bool = False
+  dry_run : bool = False
+  seed : int = 1
+  log_interval : int = 10
+  save_model : bool = False
+)
 
 Experiment 8, batch size is 64, learning rate is 0.5.
-main <- batch_size=64, test_batch_size=1000, epochs=0, lr=0.5, gamma=0.7, no_cuda=False, dry_run=False, seed=1, log_interval=10, save_model=False
+main(
+  batch_size : int = 64
+  test_batch_size : int = 1000
+  epochs : int = 0
+  lr : float = 0.5
+  gamma : float = 0.7
+  no_cuda : bool = False
+  dry_run : bool = False
+  seed : int = 1
+  log_interval : int = 10
+  save_model : bool = False
+)
 
 Experiment 9, batch size is 64, learning rate is 1.0.
-main <- batch_size=64, test_batch_size=1000, epochs=0, lr=1.0, gamma=0.7, no_cuda=False, dry_run=False, seed=1, log_interval=10, save_model=False
+main(
+  batch_size : int = 64
+  test_batch_size : int = 1000
+  epochs : int = 0
+  lr : float = 1.0
+  gamma : float = 0.7
+  no_cuda : bool = False
+  dry_run : bool = False
+  seed : int = 1
+  log_interval : int = 10
+  save_model : bool = False
+)
 ```
 
 You can parallelize the for loop in the script to run experiments
@@ -353,12 +463,35 @@ dataloader from the command line, we just do (along with args.debug=1):
 
 ```
 ❯ python examples/mnist/with_argbind_and_refactor.py --test/dataset.split=test --test/dataset.batch_size=1000 --args.debug=1
-main <- epochs=14, no_cuda=False, seed=1, save_model=False
-train/dataset <- folder=../data, split=train, batch_size=64
-test/dataset <- folder=../data, split=test, batch_size=1000
-optimizer <- lr=1.0
-scheduler <- step_size=1, gamma=0.7
-train <- log_interval=10, dry_run=False
+main(
+  epochs : int = 14
+  no_cuda : bool = False
+  seed : int = 1
+  save_model : bool = False
+)
+dataset(
+  # scope = train
+  folder : str = ../data
+  split : str = train
+  batch_size : int = 64
+)
+dataset(
+  # scope = test
+  folder : str = ../data
+  split : str = test
+  batch_size : int = 1000
+)
+optimizer(
+  lr : float = 1.0
+)
+scheduler(
+  step_size : int = 1
+  gamma : float = 0.7
+)
+train(
+  log_interval : int = 10
+  dry_run : bool = False
+)
 ```
 
 You can see that `dataset` is called twice, with different arguments passed to it

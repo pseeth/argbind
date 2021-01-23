@@ -1,2 +1,4 @@
-hello <- name=world
+hello(
+  name : str = world
+)
 Hello world

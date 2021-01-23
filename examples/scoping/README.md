@@ -82,12 +82,23 @@ train
 val
 test
 ❯ python examples/scoping/with_argbind.py --args.load /tmp/saved_args.yml --args.debug 1
-dataset <- folder=default
+dataset(
+  folder : str = default
+)
 default
-train/dataset <- folder=train
+dataset(
+  # scope = train
+  folder : str = train
+)
 train
-val/dataset <- folder=val
+dataset(
+  # scope = val
+  folder : str = val
+)
 val
-test/dataset <- folder=test
+dataset(
+  # scope = test
+  folder : str = test
+)
 test
 ```

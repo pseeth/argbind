@@ -59,6 +59,7 @@ python -m pip install -e .
 - [Example 5: Loading, saving, and using .yml files](./examples/yaml)
 - [Example 6: Multi-stage programs](./examples/multistage)
 - [Example 7: Mimic more traditional CLI, without `func.arg` notation](./examples/without_prefix)
+- [Example 8: Debug mode](./examples/debug)
 
 ## Usage
 
@@ -78,6 +79,7 @@ Your code with ArgBind generally follows this pattern:
 3. When program is called, parse the arguments via `parse_args`.
 4. Scope the arguments, and call the bound function within the context block.
 5. Optionally call program with `--args.save` to save the current execution configuration to a `.yml` file or `--args.load` to load arguments from a prior saved execution configuration to run it the same way twice.
+6. Optionally, run your script with `--args.debug=1` to see exactly how every bound function is called.
 
 In your program, you can call `get_used_args` to inspect the state of the argument dictionary. Here's a minimal example:
 
@@ -144,6 +146,12 @@ Hello you
 # Loading saved arguments, and overriding via command line.
 ❯ python examples/hello_world/with_argbind.py --args.load=/tmp/args.yml --hello.name=me
 Hello me
+# See how each function is called with args.debug=1.
+❯ python examples/hello_world/with_argbind.py --args.load=/tmp/args.yml --args.debug=1
+hello(
+  name : str = you
+)
+Hello you
 ```
 
 You can also run the `hello` function from another Python script or a Jupyter notebook:
