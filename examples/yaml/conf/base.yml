@@ -2,3 +2,5 @@ func.arg1: from base
 func.arg2: from base
 func.arg3: from base
 func.arg4: from base
+func.arg5: 
+  - from base

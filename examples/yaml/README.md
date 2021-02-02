@@ -86,9 +86,19 @@ Argument 1: default
 Argument 2: default
 Argument 3: default
 Argument 4: default
+Argument 5: ['default']
 ```
 
 Let's run it using `conf/base.yml`:
+
+```yaml
+func.arg1: from base
+func.arg2: from base
+func.arg3: from base
+func.arg4: from base
+func.arg5: 
+  - from base
+```
 
 ```
 ❯ python examples/yaml/main.py --args.load examples/yaml/conf/base.yml
@@ -96,6 +106,7 @@ Argument 1: from base
 Argument 2: from base
 Argument 3: from base
 Argument 4: from base
+Argument 5: ['from base']
 ```
 
 Now, let's try `conf/exp1.yml` which has the following contents:
@@ -114,6 +125,7 @@ Argument 1: from base
 Argument 2: from base
 Argument 3: from base
 Argument 4: from exp1
+Argument 5: ['from base']
 ```
 
 You can see that Argument 4 is changed according to what is in `exp1.yml`, 
@@ -165,6 +177,7 @@ Argument 1: from exp2
 Argument 2: from exp2
 Argument 3: from base
 Argument 4: from exp1
+Argument 5: ['from base']
 ```
 
 As usual, we can override arguments from the command line:
@@ -175,4 +188,89 @@ Argument 1: from exp2
 Argument 2: from command line
 Argument 3: from base
 Argument 4: from exp1
+Argument 5: ['from base']
 ```
+
+Variables can also be replaced within a list. For example, `exp3.yml` has the
+following contents:
+
+```yaml
+$include:
+  - examples/yaml/conf/base.yml
+  - examples/yaml/conf/exp1.yml
+
+$vars:
+  reuse_arg: from exp3
+  reuse_arg2: from exp3 again 
+
+func.arg1: $reuse_arg
+func.arg2: $ARGBIND_ENV_VAR
+func.arg5:
+  - $reuse_arg
+  - $reuse_arg2
+```
+
+`func.arg5` is a list containing values with `$` at the beginning. Each value
+in the list that beings with `$` is replaced with the corresponding
+entry in `$vars`:
+
+```
+❯ python examples/yaml/main.py --args.load examples/yaml/conf/exp3.yml
+Argument 1: from exp3
+Argument 2: from environment variable
+Argument 3: from base
+Argument 4: from exp1
+Argument 5: ['from exp3', 'from exp3 again']
+```
+
+## Using environment variables
+
+By default, if a value includes a `$`, it is looked up in the set of current 
+environment variables. For example, in `exp4.yml`, we have:
+
+```yaml
+$include:
+  - examples/yaml/conf/base.yml
+  - examples/yaml/conf/exp1.yml
+
+$vars:
+  reuse_arg: from exp4
+
+func.arg1: $reuse_arg
+func.arg2: $ARGBIND_ENV_VAR
+func.arg5:
+  - $reuse_arg
+  - $ARGBIND_ENV_VAR
+```
+
+`func.arg2` resolves to `$ARGBIND_ENV_VAR`, which is not in `$vars`. So it 
+is instead looked up in the environment variables. Running it without 
+setting the environment variable results in:
+
+```
+❯ python examples/yaml/main.py --args.load examples/yaml/conf/exp4.yml
+$reuse_arg
+$ARGBIND_ENV_VAR
+examples/yaml/conf/base.yml
+Argument 1: from exp4
+Argument 2: $ARGBIND_ENV_VAR
+Argument 3: from base
+Argument 4: from exp1
+Argument 5: ['from exp4', '$ARGBIND_ENV_VAR']
+```
+
+If we export the environment variable first, we see that Argument 2 resolves
+to the value in the environment variable:
+
+```
+❯ export ARGBIND_ENV_VAR="from environment variable"
+❯ python examples/yaml/main.py --args.load examples/yaml/conf/exp4.yml
+Argument 1: from exp4
+Argument 2: from environment variable
+Argument 3: from base
+Argument 4: from exp1
+Argument 5: ['from exp4', 'from environment variable']
+```
+
+Argument 5 uses a mix of variables sourced from `$vars` and from 
+environment variables.

@@ -3,8 +3,10 @@ func(
   arg2 : str = default
   arg3 : str = default
   arg4 : str = default
+  arg5 : list = ['default']
 )
 Argument 1: default
 Argument 2: default
 Argument 3: default
 Argument 4: default
+Argument 5: ['default']

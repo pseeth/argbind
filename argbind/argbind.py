@@ -10,6 +10,7 @@ import os
 from pathlib import Path
 import ast
 from functools import wraps
+import warnings
 
 PARSE_FUNCS = {}
 ARGS = {}
@@ -151,14 +152,30 @@ def load_args(input_path):
         include_args.update(data)
         data = include_args
 
+    _vars = os.environ.copy()
     if '$vars' in data:
-        _vars = data.pop('$vars')
-        for key, val in data.items():
-            # Check if string starts with $.
-            if isinstance(val, str) and val.startswith('$'):
+        _vars.update(data.pop('$vars'))
+    
+    for key, val in data.items():
+        # Check if string starts with $.
+        if isinstance(val, str): 
+            if val.startswith('$'):
                 lookup = val[1:]
                 if lookup in _vars:
                     data[key] = _vars[lookup]
+        
+        elif isinstance(val, list):
+            new_list = []
+            for subval in val:
+                if subval.startswith('$'):
+                    lookup = subval[1:]
+                    if lookup in _vars:
+                        new_list.append(_vars[lookup])
+                    else:
+                        new_list.append(subval)
+                else:
+                    new_list.append(subval)
+            data[key] = new_list
 
     if 'args.debug' not in data:
         data['args.debug'] = DEBUG
