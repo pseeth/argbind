@@ -74,9 +74,39 @@ Hello test
 
 ## ArgBind with positional arguments
 
+Positional arguments work if the function is bound with `positional=True`: 
+
+```python
+@argbind.bind(positional=True)
+def hello(
+    name : str,
+    email : str,
+    notes : str = "notes"
+):
+    """Say hello to someone.
+
+    Parameters
+    ----------
+    name : str
+        Who you're saying hello to.
+    email : str
+        The email of the person.
+    notes : str, optional
+        Some optional notes about the person.
+    """
+    print("Hello " + name + ' at ' + email)
+    print(f"About {name}: {notes}")
+```
+
+Refer to the help text for the order of positional arguments in your
+program. Note that functions with positional arguments shouldn't have scopes, 
+as every scope added to the function will add positional arguments. ArgBind
+removes scoping patterns if both positional is set True, and scoping patterns are 
+added. A warning is thrown in these cases.
+
 ```
 ❯ python examples/hello_world/with_argbind_positional.py -h
-usage: with_argbind_positional.py [-h] [--args.save ARGS.SAVE] [--args.load ARGS.LOAD] [--args.debug ARGS.DEBUG] hello.name
+usage: with_argbind_positional.py [-h] [--args.save ARGS.SAVE] [--args.load ARGS.LOAD] [--args.debug ARGS.DEBUG] [--hello.notes HELLO.NOTES] hello.name hello.email
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -91,7 +121,15 @@ Generated arguments for function hello:
   Say hello to someone.
 
   hello.name            Who you're saying hello to.
+  hello.email           The email of the person.
+  --hello.notes HELLO.NOTES
+                        Some optional notes about the person.
 ```
 
-Positional arguments work as well. Refer to the help text for the order of positional arguments in your
-program.
+Example usage:
+
+```
+❯ python examples/hello_world/with_argbind_positional.py bob bob@abc.com --hello.notes "Some notes about Bob"
+Hello bob at bob@abc.com
+About bob: Some notes about Bob
+```

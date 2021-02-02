@@ -74,7 +74,13 @@ def bind(*patterns, without_prefix=False, positional=False):
         Arguments that are not keyword arguments are not bound by default. If
         this is True, then the arguments will be bound as positional arguments
         in some order, by default False
-    """    
+    """
+
+    if positional and patterns:
+        warnings.warn(
+            f"Combining positional arguments with scoping patterns is not allowed. Removing scoping patterns {patterns}. \n"
+            "See https://github.com/pseeth/argbind/tree/main/examples/hello_world#argbind-with-positional-arguments")
+        patterns = []
 
     def decorator(func):
         PARSE_FUNCS[func.__name__] = (func, patterns, without_prefix, positional)

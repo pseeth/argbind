@@ -21,7 +21,7 @@ Generated arguments for function hello:
 """
 import argbind
 
-@argbind.bind(positional=True)
+@argbind.bind("test", positional=True)
 def hello(
     name : str,
     email : str,
