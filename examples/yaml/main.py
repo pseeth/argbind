@@ -7,7 +7,7 @@ def func(
     arg2 : str = 'default',
     arg3 : str = 'default',
     arg4 : str = 'default',
-    arg5 : typing.List[str] = ['default']
+    arg5 : typing.List[str] = ['default'],
 ):
     """Dummy function for binding.
 

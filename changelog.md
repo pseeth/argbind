@@ -1,4 +1,7 @@
 # Changelog
+## v0.2.0
+- Fixed a bug in resolving variables in lists, introduced in v0.1.8. 
+
 ## v0.1.9
 - Positional arguments can now be bound with `positional=True`. ArgBind should now be able to build programs
   with identical APIs to ArgParse, with less code and added support for .yaml files!

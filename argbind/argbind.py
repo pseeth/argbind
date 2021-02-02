@@ -182,7 +182,7 @@ def load_args(input_path):
         elif isinstance(val, list):
             new_list = []
             for subval in val:
-                if subval.startswith('$'):
+                if isinstance(subval, str) and subval.startswith('$'):
                     lookup = subval[1:]
                     if lookup in _vars:
                         new_list.append(_vars[lookup])
