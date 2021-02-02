@@ -78,13 +78,32 @@ def test_yaml_example():
     added_args = [
         '--args.load=examples/yaml/conf/base.yml',
         '--args.load=examples/yaml/conf/exp1.yml',
-        '--args.load=examples/yaml/conf/exp2.yml'
+        '--args.load=examples/yaml/conf/exp2.yml',
+        '--args.load=examples/yaml/conf/exp3.yml',
+        '--args.load=examples/yaml/conf/exp4.yml',
+    ]
+    added_args = [
+        {'env': {}, 'flags': ['--args.load=examples/yaml/conf/base.yml']},
+        {'env': {}, 'flags': ['--args.load=examples/yaml/conf/exp1.yml']},
+        {'env': {}, 'flags': ['--args.load=examples/yaml/conf/exp2.yml']},
+        {'env': {}, 'flags': ['--args.load=examples/yaml/conf/exp3.yml']},
+        {'env': {'ARGBIND_ENV_VAR': 'test'}, 'flags': ['--args.load=examples/yaml/conf/exp4.yml']},
+        {'env': {}, 'flags': ['--args.load=examples/yaml/conf/exp4.yml']},
     ]
 
     path = str(examples_path / 'yaml' / 'main.py')
-    for i, add_arg in enumerate(added_args):
-        output = subprocess.run(["python", path] + [add_arg], 
-            stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    for i, add_arg in enumerate(added_args):      
+        cmd = [f"python", path] + add_arg['flags'] 
+
+        environ = os.environ.copy()        
+        environ.update(add_arg['env'])
+
+        output = subprocess.run(
+            cmd, 
+            stdout=subprocess.PIPE, 
+            stderr=subprocess.PIPE,
+            env=environ
+        )
         output = output.stdout.decode('utf-8')
 
         _path = path.split('examples/')[-1] + f'.run{i}'

@@ -1,4 +1,8 @@
 # Changelog
+## v0.1.8
+- Environment variables can now be referenced within YAML files. All variables that are in `os.environ` are used to resolve any values that start with `$` in a YAML file.
+- Variables now resolve not only for strings but also within lists of strings.
+
 ## v0.1.7
 - Updated the behavior of `args.debug` to create a prettier and more readable 
   output.

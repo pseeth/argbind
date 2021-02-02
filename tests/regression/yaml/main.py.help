@@ -1,7 +1,7 @@
 usage: main.py [-h] [--args.save ARGS.SAVE] [--args.load ARGS.LOAD]
                [--args.debug ARGS.DEBUG] [--func.arg1 FUNC.ARG1]
                [--func.arg2 FUNC.ARG2] [--func.arg3 FUNC.ARG3]
-               [--func.arg4 FUNC.ARG4]
+               [--func.arg4 FUNC.ARG4] [--func.arg5 FUNC.ARG5]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -23,3 +23,4 @@ Generated arguments for function func:
                         Argument 3, by default 'default'
   --func.arg4 FUNC.ARG4
                         Argument 4, by default 'default'
+  --func.arg5 FUNC.ARG5
