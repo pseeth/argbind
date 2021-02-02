@@ -1,0 +1,15 @@
+run(
+  stage : str = download
+)
+output(
+  folder : str = /tmp/output
+)
+Making output folder /tmp/output.
+Switched working directory to /tmp/output
+download(
+  folder : str = /data/raw
+)
+STAGE: DOWNLOAD
+Downloading data to /data/raw
+
+Returning to original folder

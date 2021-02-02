@@ -49,6 +49,8 @@ def test_example(path):
     
     if 'positional' in path:
         add_args.extend(["Bob", "bob@abc.com", "--hello.notes='Some notes about Bob'"])
+    if 'subcommands' in path:
+        add_args.append("download")
 
     output = subprocess.run(["python", path] + add_args, 
         stdout=subprocess.PIPE, stderr=subprocess.PIPE)

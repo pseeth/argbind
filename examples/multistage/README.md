@@ -374,3 +374,72 @@ Returning to original folder
 
 This is one way to structure a multi-stage program with ArgBind. 
 Check out the full script for more details!
+
+## Making each function a subcommand
+
+You may want to structure your programs as one with subprograms, which can be specified like this:
+
+```
+python program.py subprogram --sub_program.arg1=...
+```
+
+You can do this in ArgBind by using `positional=True` in the `run` function:
+
+```python
+@argbind.bind(without_prefix=True, positional=True)
+def run(stage : str):
+    """Run stages.
+
+    Parameters
+    ----------
+    stages : str
+        Stage to run
+    """
+    with output():
+        if stage not in STAGES:
+            raise ValueError(
+                f"Requested stage {stage} not in known stages {STAGES}"
+            )
+        stage_fn = globals()[stage]
+        stage_fn()
+```
+
+Then, you can run each stage independently as its own program like so:
+
+```
+❯ python examples/multistage/multistage_with_subcommands.py download
+Making output folder /tmp/output.
+Switched working directory to /tmp/output
+STAGE: DOWNLOAD
+Downloading data to /data/raw
+
+Returning to original folder
+❯ python examples/multistage/multistage_with_subcommands.py preprocess
+Making output folder /tmp/output.
+Switched working directory to /tmp/output
+STAGE: PREPROCESS
+Preprocessing /data/raw into /data/processed
+
+Returning to original folder
+❯ python examples/multistage/multistage_with_subcommands.py train
+Making output folder /tmp/output.
+Switched working directory to /tmp/output
+STAGE: TRAIN
+Training model conv on data in /data/processed/train/ for 50 epochs, with learning rate of 0.001
+
+Returning to original folder
+❯ python examples/multistage/multistage_with_subcommands.py evaluate
+Making output folder /tmp/output.
+Switched working directory to /tmp/output
+STAGE: EVALUATE
+Evaluating model checkpoints/model.pth on /data/processed/test/, saving results to ./results
+
+Returning to original folder
+❯ python examples/multistage/multistage_with_subcommands.py analyze
+Making output folder /tmp/output.
+Switched working directory to /tmp/output
+STAGE: ANALYZE
+Generating plots for ./results
+
+Returning to original folder
+```
