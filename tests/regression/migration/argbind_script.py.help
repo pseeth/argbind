@@ -1,0 +1,19 @@
+usage: argbind_script.py [-h] [--args.save ARGS.SAVE] [--args.load ARGS.LOAD]
+                         [--args.debug ARGS.DEBUG] [--arg2 ARG2] [--arg3 ARG3]
+                         arg1
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --args.save ARGS.SAVE
+                        Path to save all arguments used to run script to.
+  --args.load ARGS.LOAD
+                        Path to load arguments from, stored as a .yml file.
+  --args.debug ARGS.DEBUG
+                        Print arguments as they are passed to each function.
+
+Generated arguments for function main:
+  Same script, ArgBind style.
+
+  arg1                  The first argument (positional).
+  --arg2 ARG2           The second argument (keyword), by default 'arg2'.
+  --arg3 ARG3           The third argument (keyword), by default 1.0

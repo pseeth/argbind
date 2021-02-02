@@ -51,6 +51,8 @@ def test_example(path):
         add_args.extend(["Bob", "bob@abc.com", "--hello.notes='Some notes about Bob'"])
     if 'subcommands' in path:
         add_args.append("download")
+    if 'migration' in path:
+        add_args.append("1")
 
     output = subprocess.run(["python", path] + add_args, 
         stdout=subprocess.PIPE, stderr=subprocess.PIPE)

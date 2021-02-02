@@ -61,6 +61,9 @@ python -m pip install -e .
 - [Example 7: Mimic more traditional CLI, without `func.arg` notation](./examples/without_prefix)
 - [Example 8: Debug mode](./examples/debug)
 
+If you're migrating from an ArgParse script to an ArgBind script, check out the
+[migration guide](./examples/migration).
+
 ## Usage
 
 There are six main functions.

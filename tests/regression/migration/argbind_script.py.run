@@ -1,0 +1,6 @@
+main(
+  arg1 : int = 1
+  arg2 : str = arg2
+  arg3 : float = 1.0
+)
+1 arg2 1.0
