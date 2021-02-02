@@ -1,0 +1,7 @@
+hello(
+  name : str = Bob
+  email : str = bob@abc.com
+  notes : str = 'Some notes about Bob'
+)
+Hello Bob at bob@abc.com
+About Bob: 'Some notes about Bob'
