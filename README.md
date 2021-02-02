@@ -249,7 +249,7 @@ The catch is that the function's argument MUST be typed.
 This is required so that ArgBind knows how to parse it from the
 command line.
 
-# Limitations
+# Limitations and known issues
 
 There are some limitations to ArgBind, some due to how Python function decorator works,
 and others out of a desire to keep ArgBind's code simple and straightforward.
@@ -283,6 +283,13 @@ the only supported styles are: ReST, Google, and Numpydoc-style docstrings.
 ## Not all types are supported
 
 ArgBind supports most types that might pop up in your script, but not all. The supported types can be seen in the [typing example](./examples/typing/).
+
+## Positional arguments should not be saved into .yml files
+
+If the a positional argument is saved into a .yml file, and loaded
+via `--args.load`, then any positional argument passed in the
+command line will be overridden. Take care not to pass in 
+positional arguments via `.yml` files.
 
 # Releasing
 
