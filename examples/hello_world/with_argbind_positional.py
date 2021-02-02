@@ -24,16 +24,23 @@ import argbind
 
 @argbind.bind(positional=True)
 def hello(
-    name : str
+    name : str,
+    email : str,
+    notes : str = "notes"
 ):
     """Say hello to someone.
 
     Parameters
     ----------
-    name : str, optional
+    name : str
         Who you're saying hello to.
+    email : str
+        The email of the person.
+    notes : str, optional
+        Some optional notes about the person.
     """
-    print("Hello " + name)
+    print("Hello " + name + ' at ' + email)
+    print(f"About {name}: {notes}")
 
 if __name__ == "__main__":
     # Arguments for CLI automatically generated from bound functions under the pattern

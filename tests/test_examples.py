@@ -46,6 +46,10 @@ def test_example(path):
             add_args.append("--main.epochs=0")
     elif 'mnist' in path:
         add_args.append("--epochs=0")
+    
+    if 'positional' in path:
+        add_args.extend(["Bob", "bob@abc.com", "--hello.notes='Some notes about Bob'"])
+
     output = subprocess.run(["python", path] + add_args, 
         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     output = output.stdout.decode('utf-8')
@@ -148,9 +152,10 @@ def test_scoping_example():
         with tempfile.TemporaryDirectory() as tmpdir:
             save_path = str(pathlib.Path(tmpdir) / 'args.yml')
             add_args = [f'--args.save={save_path}'] + add_arg
+            print(' '.join(["python", path] + add_args))
             output = subprocess.run(["python", path] + add_args, 
                 stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-
+            
             data = argbind.load_args(save_path)
             data = {key: val for key, val in data.items() if '/' not in key}
             argbind.dump_args(data, save_path)

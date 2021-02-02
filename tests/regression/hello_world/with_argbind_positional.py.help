@@ -1,7 +1,8 @@
 usage: with_argbind_positional.py [-h] [--args.save ARGS.SAVE]
                                   [--args.load ARGS.LOAD]
                                   [--args.debug ARGS.DEBUG]
-                                  hello.name
+                                  [--hello.notes HELLO.NOTES]
+                                  hello.name hello.email
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -16,3 +17,6 @@ Generated arguments for function hello:
   Say hello to someone.
 
   hello.name            Who you're saying hello to.
+  hello.email           The email of the person.
+  --hello.notes HELLO.NOTES
+                        Some optional notes about the person.

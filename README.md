@@ -65,7 +65,7 @@ python -m pip install -e .
 
 There are six main functions.
 
-- `bind`: Binds a functions typed keyword arguments to ArgBind.
+- `bind`: Binds a functions typed keyword arguments (and positional arguments if `positional=True`) to ArgBind.
 - `parse_args`: Actually parses the arguments into a dictionary.
 - `scope`: Context manager that scopes a dictionary containing function arguments to be used by the functions.
 - `dump_args`: Dumps the args dictionary to a `.yml` file. Used internally when program is called with `--args.save path/to/save.yml`.
@@ -74,7 +74,7 @@ There are six main functions.
 
 Your code with ArgBind generally follows this pattern:
 
-1. Write a function with a good docstring, and typed keyword arguments.
+1. Write a function with a good docstring, and typed arguments.
 2. Bind it via `bind`.
 3. When program is called, parse the arguments via `parse_args`.
 4. Scope the arguments, and call the bound function within the context block.
@@ -182,9 +182,9 @@ Please check out the [examples](#examples) for more details!
 
 ArgBind is designed around a decorator that can be used on
 functions the user wants to expose to command line or to a .yml file.
-The typed keyword arguments to that function are 
+The typed arguments to that function are 
 then bound to a dictionary. When the function is called, 
-each keyword argument is looked up in the dictionary and its
+each argument is looked up in the dictionary and its
 value is replaced with the corresponding value in the dictionary. The
 dictionary that the function looks for values in is controlled by
 `scope`:
@@ -242,7 +242,7 @@ The logic here is that arguments that are bound that are closer to the actual fu
 
 ### Note!
 
-The catch is that the function's keyword argument MUST be typed.
+The catch is that the function's argument MUST be typed.
 This is required so that ArgBind knows how to parse it from the
 command line.
 
@@ -259,11 +259,11 @@ be flippable, make the argument an int instead of a bool and use
 0 and 1 for True and False. Then you can override from command
 line like `--func.arg 0` or `--func.arg 1`.
 
-## Only typed keyword arguments are bound
+## Only typed arguments are bound
 
 Only keyword arguments that have types associated with them are bound 
-in functions. Positional arguments are not bound. Untyped keyword
-arguments cannot be bound, because ArgBind won't know what type to 
+in functions. Positional arguments are bound only if `positional=True`. 
+Untyped arguments cannot be bound, because ArgBind won't know what type to 
 parse for.
 
 ## Bound function names should be unique
@@ -308,4 +308,4 @@ twine upload dist/*
 
 If you've run into some issues with ArgBind, or have some questions, please ask 
 via Github Issues. Projects like ArgBind are pretty tricky to get right, so there
-are surely some edge cases that have been missed.
+may be some edge cases that have been missed.

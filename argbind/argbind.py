@@ -61,11 +61,20 @@ def _format_func_debug(func_name, func_kwargs, scope=None):
     return '\n'.join(formatted)
 
 def bind(*patterns, without_prefix=False, positional=False):
-    """
-    Wrap the function so it looks in ARGS (managed 
-    by the scope context manager) for keyword 
-    arguments.
-    """
+    """Binds a functions arguments so that it looks up argument
+    values in a dictionary scoped by ArgBind.
+
+    Parameters
+    ----------
+    without_prefix : bool, optional
+        Whether or not to bind without the function name as the prefix. 
+        If True, the functions arguments will be available at "arg_name"
+        rather than "func_name.arg_name", by default False
+    positional : bool, optional
+        Arguments that are not keyword arguments are not bound by default. If
+        this is True, then the arguments will be bound as positional arguments
+        in some order, by default False
+    """    
 
     def decorator(func):
         PARSE_FUNCS[func.__name__] = (func, patterns, without_prefix, positional)
@@ -79,7 +88,7 @@ def bind(*patterns, without_prefix=False, positional=False):
             for key, val in sig.parameters.items():
                 arg_type = val.annotation
                 arg_val = val.default
-                if arg_val is not inspect.Parameter.empty:
+                if arg_val is not inspect.Parameter.empty or positional:
                     arg_name = f'{prefix}.{key}' if not without_prefix else f'{key}'
                     if arg_name in ARGS and key not in kwargs:
                         cmd_kwargs[key] = ARGS[arg_name]
@@ -255,18 +264,15 @@ def parse_args():
             title=f"Generated arguments for function {prefix}",
         )
 
-        def _get_arg_names(key, patterns=None):
+        def _get_arg_names(key, is_kwarg):
             arg_names = []
             arg_name = key
 
-            if without_prefix and positional:
-                arg_name = f'PATTERN/{key}'
-            elif without_prefix and not positional:
-                arg_name = f'--PATTERN/{key}'
-            elif not without_prefix and positional:
-                arg_name = f'PATTERN/{prefix}.{key}'
-            elif not without_prefix and not positional:
-                arg_name = f'--PATTERN/{prefix}.{key}'
+            prepend = '--' if is_kwarg else ''
+            if without_prefix:
+                arg_name = prepend + f'PATTERN/{key}'
+            else:
+                arg_name = prepend + f'PATTERN/{prefix}.{key}'
 
             arg_names.append(arg_name.replace('PATTERN/', ''))
             
@@ -281,9 +287,10 @@ def parse_args():
         for key, val in sig.parameters.items():
             arg_type = val.annotation
             arg_val = val.default
+            is_kwarg = arg_val is not inspect.Parameter.empty
 
-            if arg_val is not inspect.Parameter.empty or positional:
-                arg_names = _get_arg_names(key)
+            if is_kwarg or positional:
+                arg_names = _get_arg_names(key, is_kwarg)
                 arg_help = {}
                 help_text = ''
                 if key in parameter_help:
@@ -291,7 +298,7 @@ def parse_args():
                 arg_help[arg_names[0]] = help_text
                 if len(arg_names) > 1:
                     for pattern_arg_name in arg_names[1:]:
-                        arg_help[arg_names[-1]] = argparse.SUPPRESS
+                        arg_help[pattern_arg_name] = argparse.SUPPRESS
 
                 for arg_name in arg_names:
                     inner_types = [str, int, float, bool]
