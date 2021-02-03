@@ -14,7 +14,8 @@
 ArgBind is *very* small (only ~400 lines of code, in one file), can be used to make complex and well-documented command line programs, and allows 
 you to configure program execution from .yml files.
 
-Scroll down to see some [examples](#examples). Please also look at the 
+If you're migrating from an ArgParse script to an ArgBind script, check out the
+[migration guide](./examples/migration). Scroll down to see some [examples](#examples). Please also look at the 
 current known [limitations](#limitations) of ArgBind.
 
 ## Why ArgBind?
@@ -60,9 +61,7 @@ python -m pip install -e .
 - [Example 6: Multi-stage programs](./examples/multistage)
 - [Example 7: Mimic more traditional CLI, without `func.arg` notation](./examples/without_prefix)
 - [Example 8: Debug mode](./examples/debug)
-
-If you're migrating from an ArgParse script to an ArgBind script, check out the
-[migration guide](./examples/migration).
+- [Example 8: Migrating from ArgParse](./examples/migration)
 
 ## Usage
 
