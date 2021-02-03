@@ -16,7 +16,7 @@ you to configure program execution from .yml files.
 
 If you're migrating from an ArgParse script to an ArgBind script, check out the
 [migration guide](./examples/migration). Scroll down to see some [examples](#examples). Please also look at the 
-current known [limitations](#limitations) of ArgBind.
+current known [limitations](#limitations-and-known-issues) of ArgBind.
 
 ## Why ArgBind?
 
