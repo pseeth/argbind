@@ -1,25 +1,23 @@
-Original object output
-from default
-100
+usage: with_argbind.py [-h] [--args.save ARGS.SAVE] [--args.load ARGS.LOAD]
+                       [--args.debug ARGS.DEBUG] [--MyClass.x MYCLASS.X]
+                       [--my_func.x MY_FUNC.X]
 
-Bound objects output
-MyClass(
-  x : str = from binding
-)
-from binding
-my_func(
-  x : int = 123
-)
-123
+optional arguments:
+  -h, --help            show this help message and exit
+  --args.save ARGS.SAVE
+                        Path to save all arguments used to run script to.
+  --args.load ARGS.LOAD
+                        Path to load arguments from, stored as a .yml file.
+  --args.debug ARGS.DEBUG
+                        Print arguments as they are passed to each function.
 
-Bound objects inside scoping pattern output
-MyClass(
-  # scope = pattern
-  x : str = from binding in scoping pattern
-)
-from binding in scoping pattern
-my_func(
-  # scope = pattern
-  x : int = 123
-)
-123
+Generated arguments for function MyClass:
+   Additional scope patterns: pattern. Use these by prefacing
+  any of the args below with one of these patterns. For
+  example: --pattern/MyClass.x VALUE.
+
+  --MyClass.x MYCLASS.X
+
+Generated arguments for function my_func:
+
+  --my_func.x MY_FUNC.X

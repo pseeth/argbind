@@ -14,6 +14,8 @@ if __name__ == "__main__":
     BoundClass = argbind.bind(MyClass, 'pattern')
     bound_fn = argbind.bind(my_func)
 
+    argbind.parse_args() # add for help text, though it isn't used here.
+
     args = {
       'MyClass.x': 'from binding',
       'pattern/MyClass.x': 'from binding in scoping pattern',
@@ -40,4 +42,3 @@ if __name__ == "__main__":
     with argbind.scope(args, 'pattern'):
         BoundClass() # prints "from binding in scoping pattern"
         bound_fn() # still prints 123
-        
