@@ -1,0 +1,25 @@
+Original object output
+from default
+100
+
+Bound objects output
+MyClass(
+  x : str = from binding
+)
+from binding
+my_func(
+  x : int = 123
+)
+123
+
+Bound objects inside scoping pattern output
+MyClass(
+  # scope = pattern
+  x : str = from binding in scoping pattern
+)
+from binding in scoping pattern
+my_func(
+  # scope = pattern
+  x : int = 123
+)
+123

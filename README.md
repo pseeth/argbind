@@ -8,7 +8,8 @@
 ![Lines of code](https://img.shields.io/tokei/lines/github/pseeth/argbind)
 [![Downloads](https://pepy.tech/badge/argbind)](https://pepy.tech/project/argbind)
 
-*ArgBind is a simple way to bind arguments to functions to the command line or to .yml files!* It supports scoping of arguments, similar to other frameworks like 
+*ArgBind is a simple way to bind function or class arguments to the command line or to .yml files!* 
+It supports scoping of arguments, similar to other frameworks like 
 [Hydra](https://github.com/facebookresearch/hydra) and
 [gin-config](https://github.com/google/gin-config).
 ArgBind is *very* small (only ~400 lines of code, in one file), can be used to make complex and well-documented command line programs, and allows 
@@ -61,14 +62,15 @@ python -m pip install -e .
 - [Example 6: Multi-stage programs](./examples/multistage)
 - [Example 7: Mimic more traditional CLI, without `func.arg` notation](./examples/without_prefix)
 - [Example 8: Debug mode](./examples/debug)
-- [Example 8: Migrating from ArgParse](./examples/migration)
+- [Example 9: Migrating from ArgParse](./examples/migration)
+- [Example 10: Binding existing functions and classes](./examples/bind_existing)
 
 ## Usage
 
 There are six main functions.
 
-- `bind`: Binds a functions typed keyword arguments (and positional arguments if `positional=True`) to ArgBind.
-- `parse_args`: Actually parses the arguments into a dictionary.
+- `bind`: Binds typed keyword arguments (and positional arguments if `positional=True`) of a function or class to ArgBind.
+- `parse_args`: Actually parses command line arguments into a dictionary.
 - `scope`: Context manager that scopes a dictionary containing function arguments to be used by the functions.
 - `dump_args`: Dumps the args dictionary to a `.yml` file. Used internally when program is called with `--args.save path/to/save.yml`.
 - `load_args`: Loads args from a `.yml` file. Used internally when program is called with `--args.load path/to/load.yml`.
@@ -241,6 +243,8 @@ The logic here is that arguments that are bound that are closer to the actual fu
 2. Bound via command line
 3. Bound via .yml file
 4. Bound via default for kwarg
+
+You can also use `bind` directly on classes - see [here](./examples/bind_existing).
 
 ### Note!
 
