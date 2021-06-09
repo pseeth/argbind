@@ -60,12 +60,17 @@ def _format_func_debug(func_name, func_kwargs, scope=None):
     formatted.append(")")
     return '\n'.join(formatted)
 
-def bind(*patterns, without_prefix=False, positional=False):
+def bind(*args, without_prefix=False, positional=False):
     """Binds a functions arguments so that it looks up argument
     values in a dictionary scoped by ArgBind.
 
     Parameters
     ----------
+    args : List[str] or [fn or Object] + List[str], optional
+        List of patterns to bind the function under. If the first item
+        in the list is a function or Object, then the function is bound
+        here (e.g. decorate is called on the first argument). Otherwise,
+        it is treated is a decorator.
     without_prefix : bool, optional
         Whether or not to bind without the function name as the prefix. 
         If True, the functions arguments will be available at "arg_name"
@@ -75,6 +80,13 @@ def bind(*patterns, without_prefix=False, positional=False):
         this is True, then the arguments will be bound as positional arguments
         in some order, by default False
     """
+
+    if args and not isinstance(args[0], str):
+        bound_fn_or_cls = args[0]
+        patterns = args[1:] if len(args) > 1 else []
+    else:
+        bound_fn_or_cls = None
+        patterns = args
 
     if positional and patterns:
         warnings.warn(
@@ -113,8 +125,11 @@ def bind(*patterns, without_prefix=False, positional=False):
                 print(_format_func_debug(prefix, kwargs, scope))
             return func(*args, **kwargs)
         return cmd_func
-    
-    return decorator
+
+    if bound_fn_or_cls is None:
+        return decorator
+    else:
+        return decorator(bound_fn_or_cls)
 
 # Backwards compat.
 # For scripts written with argbind<=0.1.3.
