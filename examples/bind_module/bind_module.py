@@ -10,11 +10,14 @@ args = {
     "args.debug": True,
 }
 
-net = torch.nn.Linear(1, 1)
-for fn_name in dir(optim):
-    if fn_name.startswith("_") or fn_name == "Optimizer":
-        continue
-    fn = getattr(optim, fn_name)
-    args[f"{fn_name}.lr"] = args["lr"]
-    with argbind.scope(args):
-        fn(net.parameters())
+if __name__ == "__main__":
+    argbind.parse_args()
+    
+    net = torch.nn.Linear(1, 1)
+    for fn_name in dir(optim):
+        if fn_name.startswith("_") or fn_name == "Optimizer":
+            continue
+        fn = getattr(optim, fn_name)
+        args[f"{fn_name}.lr"] = args["lr"]
+        with argbind.scope(args):
+            fn(net.parameters())

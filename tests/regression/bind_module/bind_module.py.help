@@ -1,39 +1,267 @@
-ASGD(
-  lr : float = 0.0002
-)
-Adadelta(
-  lr : float = 0.0002
-)
-Adagrad(
-  lr : float = 0.0002
-)
-Adam(
-  lr : float = 0.0002
-)
-AdamW(
-  lr : float = 0.0002
-)
-Adamax(
-  lr : float = 0.0002
-)
-LBFGS(
-  lr : float = 0.0002
-)
-NAdam(
-  lr : float = 0.0002
-)
-RAdam(
-  lr : float = 0.0002
-)
-RMSprop(
-  lr : float = 0.0002
-)
-Rprop(
-  lr : float = 0.0002
-)
-SGD(
-  lr : float = 0.0002
-)
-SparseAdam(
-  lr : float = 0.0002
-)
+usage: bind_module.py [-h] [--args.save ARGS.SAVE] [--args.load ARGS.LOAD]
+                      [--args.debug ARGS.DEBUG] [--ASGD.lr ASGD.LR]
+                      [--ASGD.lambd ASGD.LAMBD] [--ASGD.alpha ASGD.ALPHA]
+                      [--ASGD.t0 ASGD.T0]
+                      [--ASGD.weight_decay ASGD.WEIGHT_DECAY]
+                      [--Adadelta.lr ADADELTA.LR]
+                      [--Adadelta.rho ADADELTA.RHO]
+                      [--Adadelta.eps ADADELTA.EPS]
+                      [--Adadelta.weight_decay ADADELTA.WEIGHT_DECAY]
+                      [--Adagrad.lr ADAGRAD.LR]
+                      [--Adagrad.lr_decay ADAGRAD.LR_DECAY]
+                      [--Adagrad.weight_decay ADAGRAD.WEIGHT_DECAY]
+                      [--Adagrad.initial_accumulator_value ADAGRAD.INITIAL_ACCUMULATOR_VALUE]
+                      [--Adagrad.eps ADAGRAD.EPS] [--Adam.lr ADAM.LR]
+                      [--Adam.betas ADAM.BETAS] [--Adam.eps ADAM.EPS]
+                      [--Adam.weight_decay ADAM.WEIGHT_DECAY] [--Adam.amsgrad]
+                      [--Adam.maximize] [--AdamW.lr ADAMW.LR]
+                      [--AdamW.betas ADAMW.BETAS] [--AdamW.eps ADAMW.EPS]
+                      [--AdamW.weight_decay ADAMW.WEIGHT_DECAY]
+                      [--AdamW.amsgrad] [--AdamW.maximize]
+                      [--Adamax.lr ADAMAX.LR] [--Adamax.betas ADAMAX.BETAS]
+                      [--Adamax.eps ADAMAX.EPS]
+                      [--Adamax.weight_decay ADAMAX.WEIGHT_DECAY]
+                      [--LBFGS.lr LBFGS.LR] [--LBFGS.max_iter LBFGS.MAX_ITER]
+                      [--LBFGS.max_eval LBFGS.MAX_EVAL]
+                      [--LBFGS.tolerance_grad LBFGS.TOLERANCE_GRAD]
+                      [--LBFGS.tolerance_change LBFGS.TOLERANCE_CHANGE]
+                      [--LBFGS.history_size LBFGS.HISTORY_SIZE]
+                      [--LBFGS.line_search_fn LBFGS.LINE_SEARCH_FN]
+                      [--NAdam.lr NADAM.LR] [--NAdam.betas NADAM.BETAS]
+                      [--NAdam.eps NADAM.EPS]
+                      [--NAdam.weight_decay NADAM.WEIGHT_DECAY]
+                      [--NAdam.momentum_decay NADAM.MOMENTUM_DECAY]
+                      [--RAdam.lr RADAM.LR] [--RAdam.betas RADAM.BETAS]
+                      [--RAdam.eps RADAM.EPS]
+                      [--RAdam.weight_decay RADAM.WEIGHT_DECAY]
+                      [--RMSprop.lr RMSPROP.LR]
+                      [--RMSprop.alpha RMSPROP.ALPHA]
+                      [--RMSprop.eps RMSPROP.EPS]
+                      [--RMSprop.weight_decay RMSPROP.WEIGHT_DECAY]
+                      [--RMSprop.momentum RMSPROP.MOMENTUM]
+                      [--RMSprop.centered] [--Rprop.lr RPROP.LR]
+                      [--Rprop.etas RPROP.ETAS]
+                      [--Rprop.step_sizes RPROP.STEP_SIZES] [--SGD.lr SGD.LR]
+                      [--SGD.momentum SGD.MOMENTUM]
+                      [--SGD.dampening SGD.DAMPENING]
+                      [--SGD.weight_decay SGD.WEIGHT_DECAY] [--SGD.nesterov]
+                      [--SGD.maximize] [--SparseAdam.lr SPARSEADAM.LR]
+                      [--SparseAdam.betas SPARSEADAM.BETAS]
+                      [--SparseAdam.eps SPARSEADAM.EPS]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --args.save ARGS.SAVE
+                        Path to save all arguments used to run script to.
+  --args.load ARGS.LOAD
+                        Path to load arguments from, stored as a .yml file.
+  --args.debug ARGS.DEBUG
+                        Print arguments as they are passed to each function.
+
+Generated arguments for function ASGD:
+  Implements Averaged Stochastic Gradient Descent.
+
+  --ASGD.lr ASGD.LR     learning rate (default: 1e-2)
+  --ASGD.lambd ASGD.LAMBD
+                        decay term (default: 1e-4)
+  --ASGD.alpha ASGD.ALPHA
+                        power for eta update (default: 0.75)
+  --ASGD.t0 ASGD.T0     point at which to start averaging (default: 1e6)
+  --ASGD.weight_decay ASGD.WEIGHT_DECAY
+                        weight decay (L2 penalty) (default: 0) .. _Acceleration of
+                        stochastic approximation by averaging:
+
+Generated arguments for function Adadelta:
+  Implements Adadelta algorithm.
+
+  --Adadelta.lr ADADELTA.LR
+                        coefficient that scale delta before it is applied to the
+                        parameters (default: 1.0)
+  --Adadelta.rho ADADELTA.RHO
+                        coefficient used for computing a running average of squared
+                        gradients (default: 0.9)
+  --Adadelta.eps ADADELTA.EPS
+                        term added to the denominator to improve numerical stability
+                        (default: 1e-6)
+  --Adadelta.weight_decay ADADELTA.WEIGHT_DECAY
+                        weight decay (L2 penalty) (default: 0) .. _ADADELTA\: An
+                        Adaptive Learning Rate Method:
+
+Generated arguments for function Adagrad:
+  Implements Adagrad algorithm.
+
+  --Adagrad.lr ADAGRAD.LR
+                        learning rate (default: 1e-2)
+  --Adagrad.lr_decay ADAGRAD.LR_DECAY
+                        learning rate decay (default: 0)
+  --Adagrad.weight_decay ADAGRAD.WEIGHT_DECAY
+                        weight decay (L2 penalty) (default: 0)
+  --Adagrad.initial_accumulator_value ADAGRAD.INITIAL_ACCUMULATOR_VALUE
+  --Adagrad.eps ADAGRAD.EPS
+                        term added to the denominator to improve numerical stability
+                        (default: 1e-10)  .. _Adaptive Subgradient Methods for
+                        Online Learning and Stochastic
+
+Generated arguments for function Adam:
+  Implements Adam algorithm.
+
+  --Adam.lr ADAM.LR     learning rate (default: 1e-3)
+  --Adam.betas ADAM.BETAS
+                        coefficients used for computing running averages of gradient
+                        and its square (default: (0.9, 0.999))
+  --Adam.eps ADAM.EPS   term added to the denominator to improve numerical stability
+                        (default: 1e-8)
+  --Adam.weight_decay ADAM.WEIGHT_DECAY
+                        weight decay (L2 penalty) (default: 0)
+  --Adam.amsgrad        whether to use the AMSGrad variant of this algorithm from
+                        the paper `On the Convergence of Adam and Beyond`_ (default:
+                        False)
+  --Adam.maximize       maximize the params based on the objective, instead of
+                        minimizing (default: False)  .. _Adam\: A Method for
+                        Stochastic Optimization:
+
+Generated arguments for function AdamW:
+  Implements AdamW algorithm.
+
+  --AdamW.lr ADAMW.LR   learning rate (default: 1e-3)
+  --AdamW.betas ADAMW.BETAS
+                        coefficients used for computing running averages of gradient
+                        and its square (default: (0.9, 0.999))
+  --AdamW.eps ADAMW.EPS
+                        term added to the denominator to improve numerical stability
+                        (default: 1e-8)
+  --AdamW.weight_decay ADAMW.WEIGHT_DECAY
+                        weight decay coefficient (default: 1e-2)
+  --AdamW.amsgrad       whether to use the AMSGrad variant of this algorithm from
+                        the paper `On the Convergence of Adam and Beyond`_ (default:
+                        False)
+  --AdamW.maximize      maximize the params based on the objective, instead of
+                        minimizing (default: False)  .. _Decoupled Weight Decay
+                        Regularization:
+
+Generated arguments for function Adamax:
+  Implements Adamax algorithm (a variant of Adam based on
+  infinity norm).
+
+  --Adamax.lr ADAMAX.LR
+                        learning rate (default: 2e-3)
+  --Adamax.betas ADAMAX.BETAS
+                        coefficients used for computing running averages of gradient
+                        and its square
+  --Adamax.eps ADAMAX.EPS
+                        term added to the denominator to improve numerical stability
+                        (default: 1e-8)
+  --Adamax.weight_decay ADAMAX.WEIGHT_DECAY
+                        weight decay (L2 penalty) (default: 0) .. _Adam\: A Method
+                        for Stochastic Optimization:
+
+Generated arguments for function LBFGS:
+  Implements L-BFGS algorithm, heavily inspired by `minFunc
+
+  --LBFGS.lr LBFGS.LR   learning rate (default: 1)
+  --LBFGS.max_iter LBFGS.MAX_ITER
+                        maximal number of iterations per optimization step (default:
+                        20)
+  --LBFGS.max_eval LBFGS.MAX_EVAL
+                        maximal number of function evaluations per optimization step
+                        (default: max_iter * 1.25).
+  --LBFGS.tolerance_grad LBFGS.TOLERANCE_GRAD
+                        termination tolerance on first order optimality (default:
+                        1e-5).
+  --LBFGS.tolerance_change LBFGS.TOLERANCE_CHANGE
+                        termination tolerance on function value/parameter changes
+                        (default: 1e-9).
+  --LBFGS.history_size LBFGS.HISTORY_SIZE
+                        update history size (default: 100).
+  --LBFGS.line_search_fn LBFGS.LINE_SEARCH_FN
+                        either 'strong_wolfe' or None (default: None).
+
+Generated arguments for function NAdam:
+  Implements NAdam algorithm.
+
+  --NAdam.lr NADAM.LR   learning rate (default: 2e-3)
+  --NAdam.betas NADAM.BETAS
+                        coefficients used for computing running averages of gradient
+                        and its square (default: (0.9, 0.999))
+  --NAdam.eps NADAM.EPS
+                        term added to the denominator to improve numerical stability
+                        (default: 1e-8)
+  --NAdam.weight_decay NADAM.WEIGHT_DECAY
+                        weight decay (L2 penalty) (default: 0)
+  --NAdam.momentum_decay NADAM.MOMENTUM_DECAY
+                        momentum momentum_decay (default: 4e-3) .. _Incorporating
+                        Nesterov Momentum into Adam:
+
+Generated arguments for function Optimizer:
+  Base class for all optimizers.
+
+Generated arguments for function RAdam:
+  Implements RAdam algorithm.
+
+  --RAdam.lr RADAM.LR   learning rate (default: 1e-3)
+  --RAdam.betas RADAM.BETAS
+                        coefficients used for computing running averages of gradient
+                        and its square (default: (0.9, 0.999))
+  --RAdam.eps RADAM.EPS
+                        term added to the denominator to improve numerical stability
+                        (default: 1e-8)
+  --RAdam.weight_decay RADAM.WEIGHT_DECAY
+                        weight decay (L2 penalty) (default: 0) .. _On the variance
+                        of the adaptive learning rate and beyond:
+
+Generated arguments for function RMSprop:
+  Implements RMSprop algorithm.
+
+  --RMSprop.lr RMSPROP.LR
+                        learning rate (default: 1e-2)
+  --RMSprop.alpha RMSPROP.ALPHA
+                        smoothing constant (default: 0.99)
+  --RMSprop.eps RMSPROP.EPS
+                        term added to the denominator to improve numerical stability
+                        (default: 1e-8)
+  --RMSprop.weight_decay RMSPROP.WEIGHT_DECAY
+                        weight decay (L2 penalty) (default: 0)
+  --RMSprop.momentum RMSPROP.MOMENTUM
+                        momentum factor (default: 0)
+  --RMSprop.centered    if ``True``, compute the centered RMSProp, the gradient is
+                        normalized by an estimation of its variance
+
+Generated arguments for function Rprop:
+  Implements the resilient backpropagation algorithm.
+
+  --Rprop.lr RPROP.LR   learning rate (default: 1e-2)
+  --Rprop.etas RPROP.ETAS
+                        pair of (etaminus, etaplis), that are multiplicative
+                        increase and decrease factors (default: (0.5, 1.2))
+  --Rprop.step_sizes RPROP.STEP_SIZES
+                        a pair of minimal and maximal allowed step sizes (default:
+                        (1e-6, 50))
+
+Generated arguments for function SGD:
+  Implements stochastic gradient descent (optionally with
+  momentum).
+
+  --SGD.lr SGD.LR       learning rate
+  --SGD.momentum SGD.MOMENTUM
+                        momentum factor (default: 0)
+  --SGD.dampening SGD.DAMPENING
+                        dampening for momentum (default: 0)
+  --SGD.weight_decay SGD.WEIGHT_DECAY
+                        weight decay (L2 penalty) (default: 0)
+  --SGD.nesterov        enables Nesterov momentum (default: False)
+  --SGD.maximize        maximize the params based on the objective, instead of
+                        minimizing (default: False)
+
+Generated arguments for function SparseAdam:
+  Implements lazy version of Adam algorithm suitable for
+  sparse tensors.
+
+  --SparseAdam.lr SPARSEADAM.LR
+                        learning rate (default: 1e-3)
+  --SparseAdam.betas SPARSEADAM.BETAS
+                        coefficients used for computing running averages of gradient
+                        and its square (default: (0.9, 0.999))
+  --SparseAdam.eps SPARSEADAM.EPS
+                        term added to the denominator to improve numerical stability
+                        (default: 1e-8)  .. _Adam\: A Method for Stochastic
+                        Optimization:
