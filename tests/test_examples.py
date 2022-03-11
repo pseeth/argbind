@@ -36,7 +36,10 @@ def test_example(path):
     
     _path = path.split('examples/')[-1] + '.help'
     output_path = regression_path / _path
-    check(output, output_path)
+    # Ignore the bind_module ones for help text, as the PyTorch docstrings
+    # might change on us, causing tests to fail.
+    if "bind_module" not in path:
+        check(output, output_path)
 
     # Execute it
     add_args = []

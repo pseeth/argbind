@@ -2,7 +2,7 @@
 
 ArgBind figures out how to parse things from the command line using
 Python Type Hinting. This means that the functions that you bind
-from your function *must* be strongly typed in the function
+from your function should ideally be typed in the function
 signature. The following types are supported:
 
 - Strings
@@ -16,6 +16,8 @@ signature. The following types are supported:
     - Passed in as flags from command line, like `--func.bool_arg`, which will set it to True. Make the default False.
 - Tuples
     - Tuples must be strongly typed, with each entry in the expected tuple typed, like this `Tuple[int, float, str]`.
+
+If typehints are not available, the type will be inferred by using the type of the default.
 
 ## Example
 
