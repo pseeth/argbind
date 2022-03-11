@@ -3,7 +3,7 @@ from typing import List, Dict, Tuple
 
 @argbind.bind()
 def func(
-    str_arg : str = 'string',
+    str_arg = 'string',
     int_arg : int = 1,
     dict_arg : Dict = None,
     list_int_arg : List[int] = None,

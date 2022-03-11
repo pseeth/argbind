@@ -1,7 +1,7 @@
 import inspect
 from contextlib import contextmanager
 import argparse
-from typing import List, Dict, Tuple
+from typing import List, Dict
 import docstring_parser
 import textwrap
 import yaml
@@ -134,6 +134,27 @@ def bind(*args, without_prefix=False, positional=False):
 # Backwards compat.
 # For scripts written with argbind<=0.1.3.
 bind_to_parser = bind
+
+class bind_module:
+    def __init__(self, module, *scopes, filter_fn=lambda fn: True, **kwargs):
+        """Binds every function/class in a specified module. The output
+        class is a bound version of the original module, with the 
+        attributes in the same place.
+
+        Parameters
+        ----------
+        module : ModuleType
+            Module or object whose attributes to bind.
+        recursive : bool, optional
+            Whether to recursively apply the binding to submodules of the
+            specified module, by default False
+        """
+        for fn_name in dir(module):
+            fn = getattr(module, fn_name)
+            if not isinstance(fn, type(sys)) and hasattr(fn, "__name__"):
+                if filter_fn(fn):
+                    bound_fn = bind(fn, *scopes, **kwargs)
+                    setattr(self, fn_name, bound_fn)
 
 def get_used_args():
     """
@@ -306,9 +327,12 @@ def parse_args():
 
 
         for key, val in sig.parameters.items():
-            arg_type = val.annotation
             arg_val = val.default
+            arg_type = val.annotation
             is_kwarg = arg_val is not inspect.Parameter.empty
+
+            if arg_type is inspect.Parameter.empty and is_kwarg:
+                arg_type = type(arg_val)
 
             if is_kwarg or positional:
                 arg_names = _get_arg_names(key, is_kwarg)

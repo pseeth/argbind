@@ -12,7 +12,7 @@ long_description = (here / 'README.md').read_text(encoding='utf-8')
 
 setup(
     name='argbind',
-    version='0.3.0', 
+    version='0.3.1', 
     description='Simple way to bind function arguments to the command line.',
     long_description=long_description,
     long_description_content_type='text/markdown',

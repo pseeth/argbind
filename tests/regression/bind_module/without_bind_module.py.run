@@ -1,0 +1,36 @@
+ASGD(
+  lr : float = 0.0002
+)
+Adadelta(
+  lr : float = 0.0002
+)
+Adagrad(
+  lr : float = 0.0002
+)
+AdamW(
+  lr : float = 0.0002
+)
+Adamax(
+  lr : float = 0.0002
+)
+LBFGS(
+  lr : float = 0.0002
+)
+NAdam(
+  lr : float = 0.0002
+)
+RAdam(
+  lr : float = 0.0002
+)
+RMSprop(
+  lr : float = 0.0002
+)
+Rprop(
+  lr : float = 0.0002
+)
+SGD(
+  lr : float = 0.0002
+)
+SparseAdam(
+  lr : float = 0.0002
+)
