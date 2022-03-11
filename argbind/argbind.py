@@ -145,9 +145,15 @@ class bind_module:
         ----------
         module : ModuleType
             Module or object whose attributes to bind.
-        recursive : bool, optional
-            Whether to recursively apply the binding to submodules of the
-            specified module, by default False
+        scopes : List[str] or [fn or Object] + List[str], optional
+            List of patterns to bind the function under.
+        filter_fn : Callable, optional
+            A function that takes in the function that is to be bound, and 
+            returns a boolean as to whether or not it should be bound.
+            Defaults to always True, no matter what the function is.
+        kwargs : keyword arguments, optional
+            Keyword arguments to the bind function.
+
         """
         for fn_name in dir(module):
             fn = getattr(module, fn_name)
