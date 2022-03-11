@@ -64,6 +64,7 @@ python -m pip install -e .
 - [Example 8: Debug mode](./examples/debug)
 - [Example 9: Migrating from ArgParse](./examples/migration)
 - [Example 10: Binding existing functions and classes](./examples/bind_existing)
+- [Example 11: Binding entire modules](./examples/bind_module)
 
 ## Usage
 
