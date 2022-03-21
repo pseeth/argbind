@@ -1,0 +1,7 @@
+Example(
+  x : int = 4
+)
+Example.some_class_method(
+  y : int = 2
+)
+I'm a class method

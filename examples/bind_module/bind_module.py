@@ -3,7 +3,7 @@ import argbind
 
 optim = argbind.bind_module(
     torch.optim, 
-    filter_fn=lambda fn: hasattr(fn, "step")
+    filter_fn=lambda fn: hasattr(fn, "step") and fn.__name__ != "Optimizer"
 )
 args = {
     "lr": 2e-4,

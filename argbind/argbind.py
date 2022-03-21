@@ -11,6 +11,7 @@ from pathlib import Path
 import ast
 from functools import wraps
 import warnings
+import copy
 
 PARSE_FUNCS = {}
 ARGS = {}
@@ -94,12 +95,21 @@ def bind(*args, without_prefix=False, positional=False):
             "See https://github.com/pseeth/argbind/tree/main/examples/hello_world#argbind-with-positional-arguments")
         patterns = []
 
-    def decorator(func):
-        PARSE_FUNCS[func.__name__] = (func, patterns, without_prefix, positional)
+
+    def decorator(object_or_func):
+        func = object_or_func
+        is_class = inspect.isclass(func)
+        if is_class:
+            func = getattr(func, "__init__")
+
+        prefix = func.__qualname__
+        if "__init__" in prefix:
+            prefix = prefix.split(".")[0]
+
+        PARSE_FUNCS[prefix] = (func, patterns, without_prefix, positional)
         
         @wraps(func)
         def cmd_func(*args, **kwargs):
-            prefix = func.__name__
             sig = inspect.signature(func)
             cmd_kwargs = {}
 
@@ -124,6 +134,11 @@ def bind(*args, without_prefix=False, positional=False):
                     scope = None
                 print(_format_func_debug(prefix, kwargs, scope))
             return func(*args, **kwargs)
+        
+        if is_class:
+            setattr(object_or_func, "__init__", cmd_func)
+            cmd_func = object_or_func
+
         return cmd_func
 
     if bound_fn_or_cls is None:
@@ -157,7 +172,7 @@ class bind_module:
         """
         for fn_name in dir(module):
             fn = getattr(module, fn_name)
-            if not isinstance(fn, type(sys)) and hasattr(fn, "__name__"):
+            if not isinstance(fn, type(sys)) and hasattr(fn, "__qualname__"):
                 if filter_fn(fn):
                     bound_fn = bind(fn, *scopes, **kwargs)
                     setattr(self, fn_name, bound_fn)
@@ -297,10 +312,9 @@ def parse_args():
         help="Print arguments as they are passed to each function.")
 
     # Add kwargs from function to parser
-    for func_name in PARSE_FUNCS:
-        func, patterns, without_prefix, positional = PARSE_FUNCS[func_name]
+    for prefix in PARSE_FUNCS:
+        func, patterns, without_prefix, positional = PARSE_FUNCS[prefix]
         sig = inspect.signature(func)
-        prefix = func.__name__
 
         docstring = docstring_parser.parse(func.__doc__)
         parameter_help = docstring.params

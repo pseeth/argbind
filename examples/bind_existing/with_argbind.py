@@ -10,8 +10,16 @@ def my_func(x: int = 100):
 
 if __name__ == "__main__":
     import argbind
+    import pickle
+    import tempfile
+
+    # Create a class that inherits from the original class
+    # so we don't overwrite the original class's init
+    # method. Classes are modified *in place*.
+    class BoundClass(MyClass):
+        pass
     
-    BoundClass = argbind.bind(MyClass, 'pattern')
+    BoundClass = argbind.bind(BoundClass, 'pattern')
     bound_fn = argbind.bind(my_func)
 
     argbind.parse_args() # add for help text, though it isn't used here.
@@ -40,5 +48,9 @@ if __name__ == "__main__":
     # Scoping patterns can be used
     print("Bound objects inside scoping pattern output")
     with argbind.scope(args, 'pattern'):
-        BoundClass() # prints "from binding in scoping pattern"
+        the_class = BoundClass() # prints "from binding in scoping pattern"
         bound_fn() # still prints 123
+
+    with tempfile.NamedTemporaryFile() as f:
+        # Make sure that one can pickle the class.
+        pickle.dump(the_class, f)
