@@ -206,13 +206,16 @@ def dump_args(args, output_path):
             output.append(line)
         f.write('\n'.join(output))
 
-def load_args(input_path):
+def load_args(input_path_or_stream):
     """
-    Loads arguments from a given input path. If $include key is in
-    the args, you can include other y
+    Loads arguments from a given input path or file stream, if
+    the path is already open.
     """
-    with open(input_path, 'r') as f:
-        data = yaml.load(f, Loader=yaml.Loader)
+    if isinstance(input_path_or_stream, (str, Path)):
+        with open(input_path_or_stream, 'r') as f:
+            data = yaml.load(f, Loader=yaml.Loader)
+    else:
+        data = yaml.load(input_path_or_stream, Loader=yaml.Loader)
     
     if '$include' in data:
         include_files = data.pop('$include')

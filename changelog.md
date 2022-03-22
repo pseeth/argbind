@@ -1,4 +1,13 @@
 # Changelog
+## v0.3.3
+- Allow `argbind.load_args` to take in an already open filestream.
+
+## v0.3.2
+- Better way of binding classes.
+- Using `__qualname__` instead of `__name__` to identify functions more reliably.
+- Classes are bound by replacing their `__init__` function with an argbound version.
+- Binding `__init__` functions uses as the prefix the name of the class, rather than `__init__`.
+
 ## v0.2.0
 - Fixed a bug in resolving variables in lists, introduced in v0.1.8. 
 
