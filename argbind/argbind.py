@@ -209,7 +209,7 @@ def dump_args(args, output_path):
 def load_args(input_path_or_stream):
     """
     Loads arguments from a given input path or file stream, if
-    the path is already open.
+    the file is already open.
     """
     if isinstance(input_path_or_stream, (str, Path)):
         with open(input_path_or_stream, 'r') as f:
