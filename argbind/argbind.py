@@ -110,22 +110,39 @@ def bind(*args, without_prefix=False, positional=False):
         
         @wraps(func)
         def cmd_func(*args, **kwargs):
-            sig = inspect.signature(func)
+            parameters = list(inspect.signature(func).parameters.items())
+            
             cmd_kwargs = {}
+            pos_kwargs = {parameters[i][0]: arg for i, arg in enumerate(args)}
 
-            for key, val in sig.parameters.items():
-                arg_type = val.annotation
+            for key, val in parameters:
                 arg_val = val.default
                 if arg_val is not inspect.Parameter.empty or positional:
                     arg_name = f'{prefix}.{key}' if not without_prefix else f'{key}'
                     if arg_name in ARGS and key not in kwargs:
-                        cmd_kwargs[key] = ARGS[arg_name]
+                        val = ARGS[arg_name]
+                        if key in pos_kwargs:
+                            val = pos_kwargs[key]
+                        cmd_kwargs[key] = val
                         use_key = arg_name
                         if PATTERN:
                             use_key = f'{PATTERN}/{use_key}'
-                        USED_ARGS[use_key] = ARGS[arg_name]
+                        USED_ARGS[use_key] = val
 
             kwargs.update(cmd_kwargs)
+            cmd_args = []
+            for i, arg in enumerate(args):
+                key = parameters[i][0]
+                if key not in kwargs:
+                    cmd_args.append(arg)
+
+            # Ensure dictionary order is in parameter order
+            ordered_kwargs = {}
+            for k, _ in parameters:
+                if k in kwargs:
+                    ordered_kwargs[k] = kwargs[k]
+            kwargs = ordered_kwargs
+
             if 'args.debug' not in ARGS: ARGS['args.debug'] = False
             if ARGS['args.debug'] or DEBUG:
                 if PATTERN: 
@@ -133,7 +150,7 @@ def bind(*args, without_prefix=False, positional=False):
                 else:
                     scope = None
                 print(_format_func_debug(prefix, kwargs, scope))
-            return func(*args, **kwargs)
+            return func(*cmd_args, **kwargs)
         
         if is_class:
             setattr(object_or_func, "__init__", cmd_func)
