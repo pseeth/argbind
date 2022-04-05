@@ -1,0 +1,20 @@
+main(
+  x : int = 5
+  y : int = 3
+)
+5 3
+main(
+  x : int = 3
+  y : int = 3
+)
+3 3
+main(
+  x : int = 3
+  y : int = 5
+)
+3 5
+main(
+  x : int = 2
+  y : int = 3
+)
+2 3
