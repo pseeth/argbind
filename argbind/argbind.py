@@ -11,7 +11,6 @@ from pathlib import Path
 import ast
 from functools import wraps
 import warnings
-import copy
 
 PARSE_FUNCS = {}
 ARGS = {}
