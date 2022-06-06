@@ -99,13 +99,18 @@ def bind(*args, without_prefix=False, positional=False):
         func = object_or_func
         is_class = inspect.isclass(func)
         if is_class:
-            func = getattr(func, "__init__")
+            func = getattr(func, "__init__")            
 
         prefix = func.__qualname__
         if "__init__" in prefix:
             prefix = prefix.split(".")[0]
-
-        PARSE_FUNCS[prefix] = (func, patterns, without_prefix, positional)
+        
+        # Check if function is bound already. If it is, just re-wrap it,
+        # instead of wrapping the function twice.
+        if prefix in PARSE_FUNCS:
+            func = PARSE_FUNCS[prefix][0]
+        else:
+            PARSE_FUNCS[prefix] = (func, patterns, without_prefix, positional)
         
         @wraps(func)
         def cmd_func(*args, **kwargs):
