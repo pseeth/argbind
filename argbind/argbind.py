@@ -317,12 +317,13 @@ class str_to_dict():
 
         return _values
 
-def parse_args():
-    """
-    Goes through all detected functions that are
-    bound and adds them to the argument parser,
-    along with their scopes. Then parses the
-    command line and returns a dictionary.
+def build_parser():
+    """Builds the argument parser from all of the bound functions.
+
+    Returns
+    -------
+    ArgumentParser
+        Argument parser built by ArgBind.
     """
     p = argparse.ArgumentParser(
         formatter_class=argparse.RawTextHelpFormatter
@@ -431,6 +432,14 @@ def parse_args():
         desc = textwrap.fill(desc, width=HELP_WIDTH)
         f.description = desc
     
+    return p
+
+def parse_args(p=None):
+    """
+    Parses the command line and returns a dictionary.
+    Builds the argument parser if p is None.
+    """
+    p = build_parser() if p is None else p
     used_args = [x.replace('--', '').split('=')[0] for x in sys.argv if x.startswith('--')]
     used_args.extend(['args.save', 'args.load'])
 
