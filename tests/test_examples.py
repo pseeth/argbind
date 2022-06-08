@@ -56,6 +56,8 @@ def test_example(path):
         add_args.append("download")
     if 'migration' in path:
         add_args.append("1")
+    if "add_to_parser"in path:
+        add_args.extend(["test", "test", "test"])
 
     output = subprocess.run(["python", path] + add_args, 
         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
