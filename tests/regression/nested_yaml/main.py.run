@@ -1,0 +1,11 @@
+func(
+  arg1 : str = default
+  arg2 : str = default
+  arg3 : str = default
+  arg4 : str = default
+)
+Argument 1: default
+Argument 2: default
+Argument 3: default
+Argument 4: default
+
