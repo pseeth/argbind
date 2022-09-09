@@ -242,9 +242,7 @@ def load_args(input_path_or_stream):
         include_files = data.pop('$include')
         include_args = {}
         for include_file in include_files:
-            with open(include_file, 'r') as f:
-                _include_args = yaml.load(f, Loader=yaml.Loader)
-            include_args.update(_include_args)
+            include_args.update(load_args(include_file))
         include_args.update(data)
         data = include_args
 

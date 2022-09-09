@@ -1,0 +1,3 @@
+$include:
+  - examples/nested_yaml/conf/exp.yml
+func.arg3: from nested

@@ -29,7 +29,9 @@ Multiple files can be included by putting more items in the list.
 
 If the files in 
 the list also have `$include` directives in their contents, those `$include` 
-directives will not be parsed. **That is to say, this is NOT recursive.**
+directives will also be parsed, allowing you to maintain a hierarchy
+of configuration files as needed, without excessively long `$include`
+sections.
 
 This allows one to share a base configuration between multiple files. You can
 override something inside the base without any issues as well. For example,
