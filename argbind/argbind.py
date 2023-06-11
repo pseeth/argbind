@@ -1,7 +1,7 @@
 import inspect
 from contextlib import contextmanager
 import argparse
-from typing import List, Dict
+from typing import List, Dict, Union
 import docstring_parser
 import textwrap
 import yaml
@@ -315,7 +315,7 @@ class str_to_dict():
 
         return _values
 
-def build_parser(group: str = "default"):
+def build_parser(group: Union[list, str] = ["default"]):
     """Builds the argument parser from all of the bound functions.
 
     Returns
@@ -334,11 +334,14 @@ def build_parser(group: str = "default"):
     p.add_argument('--args.debug', type=int, required=False, default=0, 
         help="Print arguments as they are passed to each function.")
 
+    if isinstance(group, str):
+        group = [group]
     # Add kwargs from function to parser
     for prefix in PARSE_FUNCS:
         func, patterns, without_prefix, positional, group_ = PARSE_FUNCS[prefix]
-        if group_ != group:
+        if group_ not in group:
             continue
+        
         sig = inspect.signature(func)
 
         docstring = docstring_parser.parse(func.__doc__)
