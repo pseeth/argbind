@@ -335,8 +335,10 @@ def build_parser(group: str = "default"):
         help="Print arguments as they are passed to each function.")
 
     # Add kwargs from function to parser
-    for prefix in PARSE_FUNCS[group]:
-        func, patterns, without_prefix, positional = PARSE_FUNCS[prefix]
+    for prefix in PARSE_FUNCS:
+        func, patterns, without_prefix, positional, group_ = PARSE_FUNCS[prefix]
+        if group_ != group:
+            continue
         sig = inspect.signature(func)
 
         docstring = docstring_parser.parse(func.__doc__)

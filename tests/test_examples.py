@@ -30,7 +30,11 @@ def check(output, output_path):
 @pytest.mark.parametrize("path", paths)
 def test_example(path):
     # Get help text
-    output = subprocess.run(["python", path, "-h"], 
+    help_args = []
+
+    if "groups" in path:
+        help_args.append("evaluate")
+    output = subprocess.run(["python", path] + help_args + ["-h"], 
         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     output = output.stdout.decode('utf-8')
     
@@ -40,7 +44,7 @@ def test_example(path):
     # might change on us, causing tests to fail.
     if "bind_module" not in path:
         check(output, output_path)
-
+    
     # Execute it
     add_args = []
     if 'argparse' not in path:
@@ -58,6 +62,8 @@ def test_example(path):
         add_args.append("1")
     if "add_to_parser"in path:
         add_args.extend(["test", "test", "test"])
+    if "groups" in path:
+        add_args.append("train")
 
     output = subprocess.run(["python", path] + add_args, 
         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
