@@ -60,7 +60,7 @@ def _format_func_debug(func_name, func_kwargs, scope=None):
     formatted.append(")")
     return '\n'.join(formatted)
 
-def bind(*args, without_prefix=False, positional=False):
+def bind(*args, without_prefix=False, positional=False, group="default"):
     """Binds a functions arguments so that it looks up argument
     values in a dictionary scoped by ArgBind.
 
@@ -110,7 +110,7 @@ def bind(*args, without_prefix=False, positional=False):
         if prefix in PARSE_FUNCS:
             func = PARSE_FUNCS[prefix][0]
         else:
-            PARSE_FUNCS[prefix] = (func, patterns, without_prefix, positional)
+            PARSE_FUNCS[prefix] = (func, patterns, without_prefix, positional, group)
         
         @wraps(func)
         def cmd_func(*args, **kwargs):
@@ -315,7 +315,7 @@ class str_to_dict():
 
         return _values
 
-def build_parser():
+def build_parser(group: str = "default"):
     """Builds the argument parser from all of the bound functions.
 
     Returns
@@ -335,7 +335,7 @@ def build_parser():
         help="Print arguments as they are passed to each function.")
 
     # Add kwargs from function to parser
-    for prefix in PARSE_FUNCS:
+    for prefix in PARSE_FUNCS[group]:
         func, patterns, without_prefix, positional = PARSE_FUNCS[prefix]
         sig = inspect.signature(func)
 
@@ -432,12 +432,12 @@ def build_parser():
     
     return p
 
-def parse_args(p=None):
+def parse_args(p=None, group: str = "default"):
     """
     Parses the command line and returns a dictionary.
     Builds the argument parser if p is None.
     """
-    p = build_parser() if p is None else p
+    p = build_parser(group=group) if p is None else p
     used_args = [x.replace('--', '').split('=')[0] for x in sys.argv if x.startswith('--')]
     used_args.extend(['args.save', 'args.load'])
 
