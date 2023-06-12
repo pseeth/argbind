@@ -65,6 +65,7 @@ python -m pip install -e .
 - [Example 9: Migrating from ArgParse](./examples/migration)
 - [Example 10: Binding existing functions and classes](./examples/bind_existing)
 - [Example 11: Binding entire modules](./examples/bind_module)
+- [Example 12: Binding functions to specific groups](./examples/groups)
 
 ## Usage
 
