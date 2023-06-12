@@ -315,7 +315,7 @@ class str_to_dict():
 
         return _values
 
-def build_parser(group: Union[list, str] = ["default"]):
+def build_parser(group: Union[list, str] = "default"):
     """Builds the argument parser from all of the bound functions.
 
     Returns
@@ -341,7 +341,7 @@ def build_parser(group: Union[list, str] = ["default"]):
         func, patterns, without_prefix, positional, group_ = PARSE_FUNCS[prefix]
         if group_ not in group:
             continue
-        
+
         sig = inspect.signature(func)
 
         docstring = docstring_parser.parse(func.__doc__)
@@ -437,7 +437,7 @@ def build_parser(group: Union[list, str] = ["default"]):
     
     return p
 
-def parse_args(p=None, group: str = "default"):
+def parse_args(p=None, group: Union[list, str] = "default"):
     """
     Parses the command line and returns a dictionary.
     Builds the argument parser if p is None.
