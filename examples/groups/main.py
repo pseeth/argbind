@@ -5,13 +5,22 @@
 import argbind
 import sys
 
-@argbind.bind(group="prepare")
+# This function is always bound.
+@argbind.bind(without_prefix=True)
+def common(
+    some_arg: str = "test"
+):
+    pass
+
+# This function is bound only when "prepare" is the group.
+@argbind.bind(group="prepare", without_prefix=True)
 def prepare(
     data_dir: str = "/data/"
 ):
     pass
 
-@argbind.bind(group="train")
+# This function is bound only when "train" is the group.
+@argbind.bind(group="train", without_prefix=True)
 def train(
     data_dir: str = "/data/",
     num_epochs: int = 1000,
@@ -19,7 +28,8 @@ def train(
 ):
     pass
 
-@argbind.bind(group="evaluate")
+# This function is bound only when "evaluate" is the group.
+@argbind.bind(group="evaluate", without_prefix=True)
 def evaluate(
     data_dir: str = "/data/",
     save_path: str = "/runs/baseline"

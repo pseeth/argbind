@@ -1,7 +1,6 @@
 usage: main.py [-h] [--args.save ARGS.SAVE] [--args.load ARGS.LOAD]
-               [--args.debug ARGS.DEBUG]
-               [--evaluate.data_dir EVALUATE.DATA_DIR]
-               [--evaluate.save_path EVALUATE.SAVE_PATH]
+               [--args.debug ARGS.DEBUG] [--some_arg SOME_ARG]
+               [--data_dir DATA_DIR] [--save_path SAVE_PATH]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -12,7 +11,11 @@ optional arguments:
   --args.debug ARGS.DEBUG
                         Print arguments as they are passed to each function.
 
+Generated arguments for function common:
+
+  --some_arg SOME_ARG
+
 Generated arguments for function evaluate:
 
-  --evaluate.data_dir EVALUATE.DATA_DIR
-  --evaluate.save_path EVALUATE.SAVE_PATH
+  --data_dir DATA_DIR
+  --save_path SAVE_PATH

@@ -60,7 +60,7 @@ def _format_func_debug(func_name, func_kwargs, scope=None):
     formatted.append(")")
     return '\n'.join(formatted)
 
-def bind(*args, without_prefix=False, positional=False, group="default"):
+def bind(*args, without_prefix=False, positional=False, group: Union[list, str] = "default"):
     """Binds a functions arguments so that it looks up argument
     values in a dictionary scoped by ArgBind.
 
@@ -94,6 +94,8 @@ def bind(*args, without_prefix=False, positional=False, group="default"):
             "See https://github.com/pseeth/argbind/tree/main/examples/hello_world#argbind-with-positional-arguments")
         patterns = []
 
+    if isinstance(group, str):
+        group = [group]
 
     def decorator(object_or_func):
         func = object_or_func
@@ -336,10 +338,12 @@ def build_parser(group: Union[list, str] = "default"):
 
     if isinstance(group, str):
         group = [group]
+    if "default" not in group:
+        group.append("default")
     # Add kwargs from function to parser
     for prefix in PARSE_FUNCS:
-        func, patterns, without_prefix, positional, group_ = PARSE_FUNCS[prefix]
-        if group_ not in group:
+        func, patterns, without_prefix, positional, fn_group = PARSE_FUNCS[prefix]
+        if not set(fn_group) & set(group):
             continue
 
         sig = inspect.signature(func)

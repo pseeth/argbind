@@ -47,6 +47,9 @@ def test_example(path):
     
     # Execute it
     add_args = []
+    if "groups" in path:
+        add_args.append("train")
+        
     if 'argparse' not in path:
         add_args.append("--args.debug=1")
         if 'mnist' in path:
@@ -62,9 +65,9 @@ def test_example(path):
         add_args.append("1")
     if "add_to_parser"in path:
         add_args.extend(["test", "test", "test"])
-    if "groups" in path:
-        add_args.append("train")
+    
 
+    print(f"python {path} " + " ".join(add_args))
     output = subprocess.run(["python", path] + add_args, 
         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     output = output.stdout.decode('utf-8')
