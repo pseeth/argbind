@@ -6,7 +6,7 @@ usage: with_argbind.py [-h] [--args.save ARGS.SAVE] [--args.load ARGS.LOAD]
                        [--func.list_str_arg FUNC.LIST_STR_ARG]
                        [--func.bool_arg] [--func.tuple_arg FUNC.TUPLE_ARG]
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
   --args.save ARGS.SAVE
                         Path to save all arguments used to run script to.

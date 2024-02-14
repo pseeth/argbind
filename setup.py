@@ -34,7 +34,8 @@ setup(
     python_requires='>=3.5, <4',
     install_requires=[
         'pyyaml',
-        'docstring-parser'
+        'docstring-parser',
+        'omegaconf',
     ],
     extras_require={ 
         'tests': ['pytest', 'pytest-cov', 'torch', 'torchvision'],

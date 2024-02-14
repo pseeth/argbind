@@ -13,7 +13,7 @@ usage: with_argbind_and_refactor.py [-h] [--args.save ARGS.SAVE]
                                     [--main.no_cuda] [--main.seed MAIN.SEED]
                                     [--main.save_model]
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
   --args.save ARGS.SAVE
                         Path to save all arguments used to run script to.

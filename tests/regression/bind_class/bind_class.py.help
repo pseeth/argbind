@@ -3,7 +3,7 @@ usage: bind_class.py [-h] [--args.save ARGS.SAVE] [--args.load ARGS.LOAD]
                      [--Example.some_class_method.y EXAMPLE.SOME_CLASS_METHOD.Y]
                      [--Example.x EXAMPLE.X]
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
   --args.save ARGS.SAVE
                         Path to save all arguments used to run script to.

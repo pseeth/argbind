@@ -1,7 +1,7 @@
 usage: with_argparse.py [-h] [--train_folder TRAIN_FOLDER]
                         [--val_folder VAL_FOLDER] [--test_folder TEST_FOLDER]
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
   --train_folder TRAIN_FOLDER
   --val_folder VAL_FOLDER

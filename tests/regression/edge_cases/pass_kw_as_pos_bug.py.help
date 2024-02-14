@@ -2,7 +2,7 @@ usage: pass_kw_as_pos_bug.py [-h] [--args.save ARGS.SAVE]
                              [--args.load ARGS.LOAD] [--args.debug ARGS.DEBUG]
                              [--main.x MAIN.X] [--main.y MAIN.Y]
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
   --args.save ARGS.SAVE
                         Path to save all arguments used to run script to.

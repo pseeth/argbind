@@ -3,7 +3,7 @@ usage: argparse_script.py [-h] [--arg2 ARG2] [--arg3 ARG3] arg1
 positional arguments:
   arg1         The first argument (positional)
 
-optional arguments:
+options:
   -h, --help   show this help message and exit
   --arg2 ARG2  The second argument (keyword)
   --arg3 ARG3  The third argument (keyword)

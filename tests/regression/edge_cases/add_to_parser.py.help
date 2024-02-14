@@ -5,7 +5,7 @@ usage: add_to_parser.py [-h] [--args.save ARGS.SAVE] [--args.load ARGS.LOAD]
 positional arguments:
   pos
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
   --args.save ARGS.SAVE
                         Path to save all arguments used to run script to.
