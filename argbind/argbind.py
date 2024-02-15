@@ -450,7 +450,9 @@ def parse_args(p=None, group: Union[list, str] = "default"):
     used_args = [x.replace('--', '').split('=')[0] for x in sys.argv if x.startswith('--')]
     used_args.extend(['args.save', 'args.load'])
 
-    args = vars(p.parse_args())
+    known, unknown = p.parse_known_args()
+    sys.argv = sys.argv[:1] + unknown
+    args = vars(known)
     load_args_path = args.pop('args.load')
     save_args_path = args.pop('args.save')
     debug_args = args.pop('args.debug')
