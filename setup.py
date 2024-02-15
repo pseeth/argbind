@@ -35,7 +35,6 @@ setup(
     install_requires=[
         'pyyaml',
         'docstring-parser',
-        'omegaconf',
     ],
     extras_require={ 
         'tests': ['pytest', 'pytest-cov', 'torch', 'torchvision'],
