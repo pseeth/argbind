@@ -13,7 +13,7 @@ usage: multistage.py [-h] [--args.save ARGS.SAVE] [--args.load ARGS.LOAD]
                      [--analyze.results_folder ANALYZE.RESULTS_FOLDER]
                      [--run.stages RUN.STAGES]
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
   --args.save ARGS.SAVE
                         Path to save all arguments used to run script to.

@@ -16,7 +16,7 @@ usage: multistage_with_subcommands.py [-h] [--args.save ARGS.SAVE]
                                       [--analyze.results_folder ANALYZE.RESULTS_FOLDER]
                                       stage
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
   --args.save ARGS.SAVE
                         Path to save all arguments used to run script to.

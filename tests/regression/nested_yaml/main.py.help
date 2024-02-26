@@ -3,7 +3,7 @@ usage: main.py [-h] [--args.save ARGS.SAVE] [--args.load ARGS.LOAD]
                [--func.arg2 FUNC.ARG2] [--func.arg3 FUNC.ARG3]
                [--func.arg4 FUNC.ARG4]
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
   --args.save ARGS.SAVE
                         Path to save all arguments used to run script to.

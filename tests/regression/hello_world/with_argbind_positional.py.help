@@ -4,7 +4,7 @@ usage: with_argbind_positional.py [-h] [--args.save ARGS.SAVE]
                                   [--hello.notes HELLO.NOTES]
                                   hello.name hello.email
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
   --args.save ARGS.SAVE
                         Path to save all arguments used to run script to.

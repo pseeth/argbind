@@ -5,7 +5,7 @@ usage: with_argparse.py [-h] [--batch-size N] [--test-batch-size N]
 
 PyTorch MNIST Example
 
-optional arguments:
+options:
   -h, --help           show this help message and exit
   --batch-size N       input batch size for training (default: 64)
   --test-batch-size N  input batch size for testing (default: 1000)
