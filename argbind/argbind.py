@@ -451,8 +451,8 @@ def parse_args(p=None, group: Union[list, str] = "default"):
     used_args.extend(['args.save', 'args.load'])
 
     known, unknown = p.parse_known_args()
-    sys.argv = sys.argv[:1] + unknown
     args = vars(known)
+    args["args.unknown"] = unknown
     load_args_path = args.pop('args.load')
     save_args_path = args.pop('args.save')
     debug_args = args.pop('args.debug')
