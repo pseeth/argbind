@@ -229,13 +229,18 @@ def dump_args(args, output_path):
             output.append(line)
         f.write('\n'.join(output))
 
-def load_args(input_path_or_stream):
+def load_args(input_path_or_stream, config_directory = "."):
     """
     Loads arguments from a given input path or file stream, if
     the file is already open.
+
+    If config_directory is specified, the input path and all transitive
+    imports will be loaded relative to that directory. Streams and
+    absolute filepaths will not be affected.
     """
     if isinstance(input_path_or_stream, (str, Path)):
-        with open(input_path_or_stream, 'r') as f:
+        input_path = Path(config_directory) / input_path_or_stream
+        with open(input_path, 'r') as f:
             data = yaml.load(f, Loader=yaml.Loader)
     else:
         data = yaml.load(input_path_or_stream, Loader=yaml.Loader)
@@ -244,7 +249,7 @@ def load_args(input_path_or_stream):
         include_files = data.pop('$include')
         include_args = {}
         for include_file in include_files:
-            include_args.update(load_args(include_file))
+            include_args.update(load_args(include_file, config_directory))
         include_args.update(data)
         data = include_args
 
