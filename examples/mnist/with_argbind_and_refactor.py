@@ -149,7 +149,7 @@ def scheduler(
     gamma : float, optional
         Learning rate step gamma, by default 0.7
     """
-    return StepLR(optimizer, step_size=1, gamma=gamma)
+    return StepLR(optimizer, step_size=step_size, gamma=gamma)
 
 @argbind.bind()
 def main(
